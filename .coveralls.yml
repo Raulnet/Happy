@@ -1,0 +1,2 @@
+repo_token: your_token # should be kept secret!
+service_name: travis-pro # travis-ci or travis-pro
