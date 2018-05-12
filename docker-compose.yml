@@ -1,0 +1,31 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "33019:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: happydev
+      MYSQL_PASSWORD: happydev
+      MYSQL_DATABASE: happydev
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+  api:
+    build: .
+    ports:
+      - "1616:81"
+    links:
+      - mysql
+    volumes:
+      - .:/var/www/html:cached
+    environment:
+      HAPPY_ENV: dev
+      HAPPY_DEBUG: 1
+      HAPPY_MYSQL_USER: happydev
+      HAPPY_MYSQL_PASSWORD: happydev
+      HAPPY_MYSQL_DATABASE: happydev
+      HAPPY_MYSQL_DATABASE_HOST: mysql
+      HAPPY_SECRET: H4pPyS3Cr3T3k3Y
+      DOMAIN_NICK: http://localhost:3000
