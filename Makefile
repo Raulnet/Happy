@@ -32,8 +32,12 @@ rebuild:
 	make docker-start
 	sleep 10
 	make cache-clear
-#	docker-compose -f docker-compose.yml run --rm api  ./bin/console doctrine:migrations:migrate --no-interaction
+	docker-compose -f docker-compose.yml run --rm api  ./vendor/bin/phinx m --no-interaction
+	chown -R www-data ./var/cache
 
 php-fixer:
 	php-cs-fixer fix ./src -vvv --rules=@Symfony,-@PSR2
 	php-cs-fixer fix ./tests -vvv --rules=@Symfony,-@PSR2
+
+docker-reboot:
+	sudo /etc/init.d/docker restart

@@ -3,15 +3,13 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 12/05/18
- * Time: 13:18
+ * Time: 13:18.
  */
 
 namespace Happy\Tests\Command;
 
-
 use Happy\Command\SwaggerDumpCommand;
 use Happy\Service\SwaggerDumpService;
-use Happy\Tests\AbstractCommandTestCase;
 use PHPUnit\Framework\MockObject\MockBuilder;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -35,7 +33,6 @@ class SwaggerDumpCommandTest extends WebTestCase
                                              ->disableOriginalConstructor()
                                              ->getMock();
         $this->mockSwaggerDumpService->expects($this->once())->method('getSwaggerDoc')->willReturn(self::CONTAINT);
-
     }
 
     public function testExcute()
@@ -49,7 +46,7 @@ class SwaggerDumpCommandTest extends WebTestCase
         $command = $application->find('happy:swagger:dump');
         $commandTester = new CommandTester($command);
         $commandTester->execute(array(
-            'command' => $command->getName()
+            'command' => $command->getName(),
         ));
 
         $output = $commandTester->getDisplay();

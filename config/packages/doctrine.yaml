@@ -1,0 +1,31 @@
+parameters:
+     env(HAPPY_MYSQL_DATABASE_HOST): 'default'
+     env(HAPPY_MYSQL_USER): 'default'
+     env(HAPPY_MYSQL_PASSWORD): 'default'
+     env(HAPPY_MYSQL_DATABASE): 'default'
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        server_version: '5.7'
+        charset: utf8mb4
+        user: '%env(resolve:HAPPY_MYSQL_USER)%'
+        password: '%env(resolve:HAPPY_MYSQL_PASSWORD)%'
+        host: '%env(resolve:HAPPY_MYSQL_DATABASE_HOST)%'
+        dbname: '%env(resolve:HAPPY_MYSQL_DATABASE)%'
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+        
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            Happy:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'Happy\Entity'
+                alias: Happy

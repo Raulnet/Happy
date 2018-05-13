@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 12/05/18
- * Time: 13:08
+ * Time: 13:08.
  */
 
 namespace Happy\Tests\Controller;
@@ -12,9 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * Class HomeControllerTest
- *
- * @package Happy\Tests\Controller
+ * Class HomeControllerTest.
  */
 class HomeControllerTest extends WebTestCase
 {
@@ -22,13 +20,15 @@ class HomeControllerTest extends WebTestCase
      * @var \Symfony\Bundle\FrameworkBundle\Client
      */
     private $client;
+
     /**
-     * init Client
+     * init Client.
      */
     public function setUp()
     {
         $this->client = static::createClient();
     }
+
     public function testHome()
     {
         $this->client->request('GET', '/api/');

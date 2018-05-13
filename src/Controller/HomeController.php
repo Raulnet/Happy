@@ -36,6 +36,7 @@ class HomeController extends Controller
             'hello',
             'I\'m Happy!',
         ];
+
         return new JsonResponse($data);
     }
 }

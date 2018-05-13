@@ -18,6 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class SwaggerDumpCommand extends Command
 {
+    const COMMAND_NAME = 'happy:swagger:dump';
+
     /** @var SwaggerDumpService */
     private $dumpService;
 
@@ -28,13 +30,9 @@ class SwaggerDumpCommand extends Command
      */
     public function __construct(SwaggerDumpService $dumpService)
     {
-        parent::__construct();
+        parent::__construct(self::COMMAND_NAME);
+        $this->setDescription('dump swagger response');
         $this->dumpService = $dumpService;
-    }
-
-    protected function configure()
-    {
-        $this->setName('happy:swagger:dump')->setDescription('dump swagger response');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
