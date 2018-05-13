@@ -1,7 +1,7 @@
 <?php
 return [
     'paths'        => [
-        'migrations' => 'src/migrations',
+        'migrations' => './migrations',
     ],
     'environments' => [
         'default_migration_table' => 'phinxlog',
