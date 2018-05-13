@@ -30,9 +30,13 @@ class SwaggerDumpCommand extends Command
      */
     public function __construct(SwaggerDumpService $dumpService)
     {
-        parent::__construct(self::COMMAND_NAME);
-        $this->setDescription('dump swagger response');
+        parent::__construct();
         $this->dumpService = $dumpService;
+    }
+
+    protected function configure()
+    {
+        $this->setName(self::COMMAND_NAME)->setDescription('dump swagger response');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
