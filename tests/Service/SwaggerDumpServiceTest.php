@@ -11,7 +11,6 @@ namespace Happy\Tests\Service;
 use Happy\Service\SwaggerDumpService;
 use Happy\Tests\AbstractTestCase;
 use Nelmio\ApiDocBundle\ApiDocGenerator;
-use Symfony\Component\HttpKernel\HttpKernel;
 
 /**
  * Class SwaggerDumpServiceTest.
@@ -23,7 +22,7 @@ class SwaggerDumpServiceTest extends AbstractTestCase
 
     public function setUp(): void
     {
-        $kernel                 = self::bootKernel();
+        $kernel = self::bootKernel();
         $this->generatorLocator = $kernel->getContainer()->get('nelmio_api_doc.generator');
     }
 

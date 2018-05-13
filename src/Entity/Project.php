@@ -7,8 +7,6 @@
  */
 
 namespace Happy\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Happy\Entity\Traits\TimestampableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,7 +37,6 @@ class Project
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=80, nullable=false)
-     * @ORM\Id
      * @Assert\NotBlank(
      *     message="http.exception.field.name.is.required"
      * )
@@ -50,7 +47,6 @@ class Project
      * @var string
      *
      * @ORM\Column(name="url_documentation", type="string", length=255, nullable=false)
-     * @ORM\Id
      * @Assert\NotBlank(
      *     message="http.exception.field.url_documentation.is.required"
      * )
@@ -104,5 +100,4 @@ class Project
     {
         $this->urlDocumentation = $urlDocumentation;
     }
-
 }

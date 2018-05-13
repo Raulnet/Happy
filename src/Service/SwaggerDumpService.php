@@ -2,10 +2,6 @@
 
 namespace Happy\Service;
 
-use Symfony\Component\HttpKernel\HttpKernel;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\ApiDocGenerator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 

@@ -89,11 +89,11 @@ trait TimestampableTrait
     }
 
     /**
-     * Set date delete to now.
+     * @param \DateTime|null $dateTime
      */
-    public function setDateDeleted(): void
+    public function setDateDeleted(?\DateTime $dateTime): void
     {
-        $this->dateDeleted = new \DateTime('now');
+        $this->dateDeleted = $dateTime;
     }
 
     /**

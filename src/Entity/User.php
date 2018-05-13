@@ -82,7 +82,7 @@ class User implements UserInterface
      */
     public function getId(): string
     {
-        return $this->Id;
+        return $this->id;
     }
 
     /**
@@ -111,6 +111,9 @@ class User implements UserInterface
         }
     }
 
+    /**
+     * @param string $role
+     */
     public function removeRole(string $role): void
     {
         if (in_array($role, $this->roles)) {

@@ -37,7 +37,6 @@ class Documentation
      * @var string
      *
      * @ORM\Column(name="version", type="string", length=36, nullable=false)
-     * @ORM\Id
      * @Assert\NotBlank(
      *     message="http.exception.field.version.is.required"
      * )
@@ -48,7 +47,6 @@ class Documentation
      * @var string
      *
      * @ORM\Column(name="path", type="string", length=255, nullable=false)
-     * @ORM\Id
      * @Assert\NotBlank(
      *     message="http.exception.field.path.is.required"
      * )
