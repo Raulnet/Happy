@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class User.
  *
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})})
- * @ORM\Entity(repositoryClass="Malcolm\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Happy\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface

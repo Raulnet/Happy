@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Project.
  *
  * @ORM\Table(name="project", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})})
- * @ORM\Entity(repositoryClass="Malcolm\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Happy\Repository\ProjectRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Project

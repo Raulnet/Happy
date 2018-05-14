@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Documentation.
  *
  * @ORM\Table(name="documentation", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})})
- * @ORM\Entity(repositoryClass="Malcolm\Repository\DocumentationRepository")
+ * @ORM\Entity(repositoryClass="Happy\Repository\DocumentationRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Documentation
