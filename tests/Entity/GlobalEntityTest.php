@@ -35,13 +35,13 @@ class GlobalEntityTest extends AbstractTestCase
         foreach ($mapEntities as $className => $properties) {
             $this->entityPropertiesTest($className, $properties);
         }
-
-        $this->assertTrue(true);
     }
 
     /**
      * @param string $className
      * @param array  $properties
+     *
+     * @throws \Exception
      */
     private function entityPropertiesTest(string $className, array $properties): void
     {
@@ -51,7 +51,7 @@ class GlobalEntityTest extends AbstractTestCase
     }
 
     /**
-     * @param        $entity
+     * @param string $className
      * @param string $property
      * @param array  $params
      *
@@ -84,37 +84,37 @@ class GlobalEntityTest extends AbstractTestCase
     private function columnTest(string $className, string $label, array $params): void
     {
         $entity = new $className();
-        $type   = trim(strtolower($params['type']));
+        $type = trim(strtolower($params['type']));
         switch ($type) {
-            case "string":
+            case 'string':
                 $string = $this->buildType($entity, $label, 'string');
                 $this->assertTrue(is_string($string));
                 break;
-            case "array":
+            case 'array':
                 $array = $this->buildType($entity, $label, ['nick' => 'sax']);
                 $this->assertTrue(is_array($array));
                 break;
-            case "integer":
+            case 'integer':
                 $integer = $this->buildType($entity, $label, 123);
                 $this->assertTrue(is_integer($integer));
                 break;
-            case "int":
+            case 'int':
                 $int = $this->buildType($entity, $label, 321);
                 $this->assertTrue(is_integer($int));
-            case "datetime":
+            case 'datetime':
                 $datetime = $this->buildType($entity, $label, new \DateTime('now'));
                 $this->assertTrue($datetime instanceof $datetime);
                 break;
             default:
-                throw new \Exception('Type: ' . $type . ' unknown');
+                throw new \Exception('Type: '.$type.' unknown');
         }
         if ($params['nullable']) {
-            $methodSetName = 'set' . ucfirst($label);
+            $methodSetName = 'set'.ucfirst($label);
             if (method_exists($entity, $methodSetName)) {
                 $entity->$methodSetName(null);
                 $this->assertTrue(true);
             }
-            $methodGetName = 'get' . ucfirst($label);
+            $methodGetName = 'get'.ucfirst($label);
             if (method_exists($entity, $methodGetName)) {
                 $this->assertTrue(null === $entity->$methodGetName());
             }
@@ -130,12 +130,12 @@ class GlobalEntityTest extends AbstractTestCase
      */
     private function buildType($entity, $label, $value)
     {
-        $methodSetName = 'set' . ucfirst($label);
+        $methodSetName = 'set'.ucfirst($label);
         if (method_exists($entity, $methodSetName)) {
             $entity->$methodSetName($value);
             $this->assertTrue(true);
         }
-        $methodGetName = 'get' . ucfirst($label);
+        $methodGetName = 'get'.ucfirst($label);
         if (method_exists($entity, $methodGetName)) {
             return $entity->$methodGetName();
         }
@@ -150,10 +150,10 @@ class GlobalEntityTest extends AbstractTestCase
      */
     private function manyToManyTest(string $className, string $label, array $params): void
     {
-        $entity           = new $className();
-        $collection       = new ArrayCollection();
+        $entity = new $className();
+        $collection = new ArrayCollection();
         $targetEntityName = $params['target_entity'];
-        $targetEntity     = new $targetEntityName();
+        $targetEntity = new $targetEntityName();
         $collection->add($targetEntity);
         $value = $this->buildType($entity, $label, $collection);
         $this->assertTrue($value instanceof Collection);
@@ -166,23 +166,24 @@ class GlobalEntityTest extends AbstractTestCase
      */
     private function manyToOneTest(string $className, string $label, array $params): void
     {
-        $entity           = new $className();
+        $entity = new $className();
         $targetEntityName = $params['target_entity'];
-        $targetEntity     = new $targetEntityName();
-        $value            = $this->buildType($entity, $label, $targetEntity);
+        $targetEntity = new $targetEntityName();
+        $value = $this->buildType($entity, $label, $targetEntity);
         $this->assertTrue($value instanceof $targetEntityName);
     }
 
     private function dumpEntityProperties(): array
     {
-        $resultScan  = preg_grep('/^([^.])/', scandir(__DIR__ . '/../../src/Entity'));
+        $resultScan = preg_grep('/^([^.])/', scandir(__DIR__.'/../../src/Entity'));
         $entitiesMap = [];
         foreach ($resultScan as $result) {
             if (preg_match('/^.*php$/i', $result)) {
-                $entityName               = 'Happy\Entity\\' . str_replace('.php', '', $result);
+                $entityName = 'Happy\Entity\\'.str_replace('.php', '', $result);
                 $entitiesMap[$entityName] = $this->getEntityProperty($entityName);
             }
         }
+
         return $entitiesMap;
     }
 
@@ -193,7 +194,7 @@ class GlobalEntityTest extends AbstractTestCase
      */
     private function getEntityProperty(string $entityName): array
     {
-        $classMethods    = get_class_methods($entityName);
+        $classMethods = get_class_methods($entityName);
         $classProperties = [];
         foreach ($classMethods as $classMethod) {
             if (preg_match('/^get?/i', $classMethod)) {
@@ -211,20 +212,20 @@ class GlobalEntityTest extends AbstractTestCase
     {
         $property = [];
 
-        $reflectionProperty  = new \ReflectionProperty($entityName, $labelProperty);
+        $reflectionProperty = new \ReflectionProperty($entityName, $labelProperty);
         $propertyAnnotations = $this->annotationReader->getPropertyAnnotations($reflectionProperty);
         foreach ($propertyAnnotations as $propertyAnnotation) {
             if ($propertyAnnotation instanceof Column) {
                 $property['column_type'] = 'column';
-                $property['type']        = $propertyAnnotation->type;
-                $property['nullable']    = $propertyAnnotation->nullable;
+                $property['type'] = $propertyAnnotation->type;
+                $property['nullable'] = $propertyAnnotation->nullable;
             }
             if ($propertyAnnotation instanceof ManyToMany) {
-                $property['column_type']   = 'many_to_many';
+                $property['column_type'] = 'many_to_many';
                 $property['target_entity'] = $propertyAnnotation->targetEntity;
             }
             if ($propertyAnnotation instanceof ManyToOne) {
-                $property['column_type']   = 'many_to_one';
+                $property['column_type'] = 'many_to_one';
                 $property['target_entity'] = $propertyAnnotation->targetEntity;
             }
             //TODO add ManyToMany OneToMany etc...
