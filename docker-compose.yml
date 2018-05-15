@@ -15,7 +15,7 @@ services:
   api:
     build: .
     ports:
-      - "1616:81"
+      - "1616:80"
     links:
       - mysql
     volumes:

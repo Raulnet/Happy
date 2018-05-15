@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod actions rewrite headers expires
 
 RUN { \
-    echo '<VirtualHost *:81>'; \
+    echo '<VirtualHost *:80>'; \
     echo 'ServerAdmin webmaster@localhost'; \
     echo 'DocumentRoot /var/www/html/public'; \
     echo '<Directory /var/www/html/public>'; \
@@ -30,12 +30,13 @@ RUN { \
     echo 'Order Allow,Deny'; \
     echo 'Allow from All'; \
     echo '<IfModule mod_rewrite.c>'; \
+    echo 'Header set Access-Control-Allow-Origin *'; \
     echo 'Options -MultiViews'; \
     echo 'RewriteEngine On'; \
     echo 'RewriteCond %{REQUEST_FILENAME} !-f'; \
     echo 'RewriteRule ^(.*)$ index.php [QSA,L]'; \
-    echo 'RewriteCond %{HTTP:Authorization} ^(.*)'; \
-    echo 'RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]'; \
+    echo 'RewriteCond %{HTTP:Authorization} ^(.+)$'; \
+    echo 'RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]'; \
     echo '</IfModule>'; \
     echo '</Directory>'; \
     echo '<Directory /var/www/html/public/bundles>'; \
@@ -46,10 +47,7 @@ RUN { \
     echo 'ErrorLog ${APACHE_LOG_DIR}/error.log'; \
     echo 'CustomLog ${APACHE_LOG_DIR}/access.log combined'; \
     echo '</VirtualHost>'; \
-  } | tee "$APACHE_CONFDIR/sites-available/001-api-happy.conf" \
-  && a2ensite 001-api-happy \
-  && echo 'Listen 81' >> "$APACHE_CONFDIR/ports.conf"
-EXPOSE 81
+    } | tee "$APACHE_CONFDIR/sites-available/000-default.conf"
 
 
 #PHP config
