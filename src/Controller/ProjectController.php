@@ -45,7 +45,7 @@ class ProjectController extends Controller
 
     /**
      * @param Request $request
-     * @param string $id
+     * @param string  $id
      *
      * @Route("/project", name="_happy_post_project", methods={"POST"})
      * @SWG\Response(
@@ -62,7 +62,7 @@ class ProjectController extends Controller
 
     /**
      * @param Request $request
-     * @param string $id
+     * @param string  $id
      *
      * @Route("/project/{id}",
      *     name="_happy_edit_project",

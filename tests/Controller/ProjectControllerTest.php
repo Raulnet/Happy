@@ -35,10 +35,10 @@ class ProjectControllerTest extends WebTestCase
      */
     public function setUp()
     {
-        $this->client  = static::createClient();
-        $this->router  = $this->client->getContainer()->get('router');
+        $this->client = static::createClient();
+        $this->router = $this->client->getContainer()->get('router');
         $this->project = new Project();
-        $uuid          = Uuid::uuid4();
+        $uuid = Uuid::uuid4();
         $this->project->setId($uuid->toString());
     }
 
@@ -60,7 +60,6 @@ class ProjectControllerTest extends WebTestCase
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path);
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-
     }
 
     public function testEditProject()
