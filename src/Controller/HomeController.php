@@ -15,14 +15,11 @@ use Swagger\Annotations as SWG;
 
 /**
  * Class HomeController.
- *
-
  */
 
 /**
- * Class HomeController
+ * Class HomeController.
  *
- * @package Happy\Controller
  * @Route("/api")
  */
 class HomeController extends Controller
@@ -37,8 +34,10 @@ class HomeController extends Controller
      *
      * @return JsonResponse
      */
-    public function home()
+    public function home(): JsonResponse
     {
+        // TODO getUser()
+        // TODO return All Project linkedByUser or All Project For Admin
         $data = [
             'hello',
             'I\'m Happy!',

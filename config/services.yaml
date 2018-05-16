@@ -29,3 +29,9 @@ services:
     Happy\Service\SwaggerDumpService:
         arguments: ["@nelmio_api_doc.generator"]
 
+    Happy\Service\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+        arguments: ["%kernel.environment%"]
+
+

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 15/05/18
- * Time: 00:06
+ * Time: 00:06.
  */
 
 namespace Happy\Tests\Repository;
@@ -15,9 +15,7 @@ use Happy\Tests\AbstractTestCase;
 use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
- * Class GlobalRepositoryTest
- *
- * @package Happy\Tests\Repository
+ * Class GlobalRepositoryTest.
  */
 class GlobalRepositoryTest extends AbstractTestCase
 {
@@ -31,7 +29,6 @@ class GlobalRepositoryTest extends AbstractTestCase
     }
 
     public function testEntityRepository() {
-
         $entitiesMap = $this->dumpEntityProperties();
         foreach ($entitiesMap as $className => $annotations) {
             $this->annotationsTest($className, $annotations);
@@ -44,7 +41,7 @@ class GlobalRepositoryTest extends AbstractTestCase
      * @param string $className
      * @param array  $annotations
      */
-    private function annotationsTest(string $className, array $annotations):void
+    private function annotationsTest(string $className, array $annotations): void
     {
         foreach ($annotations as $annotation) {
             if($annotation instanceof Entity) {

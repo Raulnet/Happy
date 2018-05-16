@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 16/05/18
- * Time: 21:28
+ * Time: 21:28.
  */
 
 namespace Happy\Controller;
@@ -14,9 +14,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Swagger\Annotations as SWG;
 
 /**
- * Class HealthConttroller
+ * Class HealthConttroller.
  *
- * @package Happy\Controller
  * @Route("/api")
  */
 class HealthController extends Controller
@@ -31,8 +30,7 @@ class HealthController extends Controller
      *
      * @return JsonResponse
      */
-    public function health() {
-
+    public function health(): JsonResponse {
         return new JsonResponse('OK', JsonResponse::HTTP_OK);
     }
 }

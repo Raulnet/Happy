@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 14/05/18
- * Time: 23:49
+ * Time: 23:49.
  */
 
 namespace Happy\Repository;
@@ -13,9 +13,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Happy\Entity\User;
 
 /**
- * Class UserRepository
- *
- * @package Happy\Repository
+ * Class UserRepository.
  */
 class UserRepository extends ServiceEntityRepository
 {

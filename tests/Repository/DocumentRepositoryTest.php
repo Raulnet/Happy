@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 14/05/18
- * Time: 23:52
+ * Time: 23:52.
  */
 
 namespace Happy\Tests\Repository;
-
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -15,9 +14,7 @@ use Happy\Entity\Documentation;
 use Happy\Tests\AbstractTestCase;
 
 /**
- * Class DocumentRepositoryTest
- *
- * @package Happy\Tests\Repository
+ * Class DocumentRepositoryTest.
  */
 class DocumentRepositoryTest extends AbstractTestCase
 {
@@ -35,5 +32,4 @@ class DocumentRepositoryTest extends AbstractTestCase
         $entityRepository = $this->manager->getRepository(Documentation::class);
         $this->assertTrue($entityRepository instanceof EntityRepository);
     }
-
 }

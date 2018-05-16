@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 14/05/18
- * Time: 23:48
+ * Time: 23:48.
  */
 
 namespace Happy\Repository;
@@ -13,9 +13,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Happy\Entity\Project;
 
 /**
- * Class ProjectRepository
- *
- * @package Happy\Repository
+ * Class ProjectRepository.
  */
 class ProjectRepository extends ServiceEntityRepository
 {
@@ -28,5 +26,4 @@ class ProjectRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Project::class);
     }
-
 }
