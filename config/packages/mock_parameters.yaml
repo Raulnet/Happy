@@ -1,3 +1,4 @@
 parameters:
     env(HAPPY_SECRET): M0cKh4PpY$3cR3t3K3y
     env(DOMAIN_NICK): http://mock-nick.sax
+    env(SENTRY_DSN): null
