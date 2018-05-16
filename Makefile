@@ -40,4 +40,4 @@ php-fixer:
 	php-cs-fixer fix ./tests -vvv --rules=@Symfony,-@PSR2
 
 docker-reboot:
-	sudo /etc/init.d/docker restart
+	/etc/init.d/docker restart

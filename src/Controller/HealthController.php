@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: raulnet
- * Date: 12/05/18
- * Time: 00:15.
+ * Date: 16/05/18
+ * Time: 21:28
  */
 
 namespace Happy\Controller;
@@ -14,36 +14,25 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Swagger\Annotations as SWG;
 
 /**
- * Class HomeController.
- *
-
- */
-
-/**
- * Class HomeController
+ * Class HealthConttroller
  *
  * @package Happy\Controller
  * @Route("/api")
  */
-class HomeController extends Controller
+class HealthController extends Controller
 {
     /**
-     * @Route("/", name="happy_home", methods={"GET"})
+     * @Route("/health", name="_happy_health", methods={"GET"})
      * @SWG\Response(
      *     response=200,
-     *     description="Returns list of api available"
+     *     description="Returns Status Application"
      * )
-     * @SWG\Tag(name="home")
+     * @SWG\Tag(name="health")
      *
      * @return JsonResponse
      */
-    public function home()
-    {
-        $data = [
-            'hello',
-            'I\'m Happy!',
-        ];
+    public function health() {
 
-        return new JsonResponse($data);
+        return new JsonResponse('OK', JsonResponse::HTTP_OK);
     }
 }
