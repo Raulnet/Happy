@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 17/05/18
- * Time: 21:15
+ * Time: 21:15.
  */
 
 namespace Happy\Tests\Controller;
@@ -15,9 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
- * Class UserControllerTest
- *
- * @package Happy\Tests\Controller
+ * Class UserControllerTest.
  */
 class UserControllerTest extends AbstractTestCase
 {

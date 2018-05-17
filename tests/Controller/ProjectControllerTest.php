@@ -90,5 +90,4 @@ class ProjectControllerTest extends WebTestCase
         $this->client->request('DELETE', $path);
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
-
 }

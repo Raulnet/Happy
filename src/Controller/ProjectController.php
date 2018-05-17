@@ -16,9 +16,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Swagger\Annotations as SWG;
 
 /**
- * Class ProjectController
+ * Class ProjectController.
  *
- * @package Happy\Controller
  * @Route("/api")
  */
 class ProjectController extends AbstractController

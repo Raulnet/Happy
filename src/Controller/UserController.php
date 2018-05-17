@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 17/05/18
- * Time: 20:50
+ * Time: 20:50.
  */
 
 namespace Happy\Controller;
@@ -15,14 +15,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Swagger\Annotations as SWG;
 
 /**
- * Class UserController
+ * Class UserController.
  *
- * @package Happy\Controller
  * @Route("/api")
  */
 class UserController extends AbstractController
 {
-
     /**
      * @Route("/user",
      *     name="_happy_get_users",
@@ -37,7 +35,6 @@ class UserController extends AbstractController
      * @return JsonResponse
      */
     public function getUsers(): JsonResponse {
-
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
 
@@ -59,7 +56,6 @@ class UserController extends AbstractController
      * @return JsonResponse
      */
     public function getUserById($id): JsonResponse {
-
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
 
@@ -76,12 +72,11 @@ class UserController extends AbstractController
      * @return JsonResponse
      */
     public function postUser(Request $request): JsonResponse {
-
         return new JsonResponse(null, JsonResponse::HTTP_CREATED);
     }
 
     /**
-     * @param string  $id
+     * @param string $id
      *
      * @Route("/user/{id}",
      *     name="_happy_edit_user",
@@ -99,12 +94,11 @@ class UserController extends AbstractController
      * @return JsonResponse
      */
     public function editUser($id): JsonResponse {
-
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
 
     /**
-     * @param string  $id
+     * @param string $id
      *
      * @Route("/user/{id}",
      *     name="_happy_remove_user",
@@ -122,8 +116,6 @@ class UserController extends AbstractController
      * @return JsonResponse
      */
     public function removeUser($id): JsonResponse {
-
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
-
 }

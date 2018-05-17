@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 17/05/18
- * Time: 21:28
+ * Time: 21:28.
  */
 
 namespace Happy\Controller;
@@ -14,11 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
 
-
 /**
- * Class DocumentController
+ * Class DocumentController.
  *
- * @package Happy\Controller
  * @Route("/api")
  */
 class DocumentController extends AbstractController
