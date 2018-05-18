@@ -8,6 +8,7 @@
 
 namespace Happy\Controller;
 
+use Happy\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,8 +37,6 @@ class HomeController extends Controller
      */
     public function home(): JsonResponse
     {
-        // TODO getUser()
-        // TODO return All Project linkedByUser or All Project For Admin
         $data = [
             'hello',
             'I\'m Happy!',

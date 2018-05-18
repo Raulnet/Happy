@@ -24,7 +24,7 @@ class DocumentationController extends AbstractController
     /**
      * @param string $projectId
      *
-     * @Route("/project/{projectId}/documentation",
+     * @Route("/projects/{projectId}/documentations",
      *     name="_happy_get_documentations",
      *     methods={"GET"},
      *     requirements={

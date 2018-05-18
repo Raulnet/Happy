@@ -1,7 +1,7 @@
 framework:
     secret: '%env(resolve:HAPPY_SECRET)%'
     serializer:
-        enabled: false
+        enabled: true
     session:
         handler_id: ~
     php_errors:

@@ -8,7 +8,7 @@
 
 namespace Happy\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Happy\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,10 +19,10 @@ use Swagger\Annotations as SWG;
  *
  * @Route("/api")
  */
-class UserController extends AbstractController
+class UserController extends AbstractApiController
 {
     /**
-     * @Route("/user",
+     * @Route("/users",
      *     name="_happy_get_users",
      *     methods={"GET"}
      *     )
@@ -35,12 +35,14 @@ class UserController extends AbstractController
      * @return JsonResponse
      */
     public function getUsers(): JsonResponse {
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
+        return $this->apiJsonResponse($users);
     }
 
     /**
      * @param string $id
-     * @Route("/user/{id}",
+     * @Route("/users/{id}",
      *     name="_happy_get_user",
      *     methods={"GET"},
      *     requirements={
@@ -62,7 +64,7 @@ class UserController extends AbstractController
     /**
      * @param Request $request
      *
-     * @Route("/user", name="_happy_post_user", methods={"POST"})
+     * @Route("/users", name="_happy_post_user", methods={"POST"})
      * @SWG\Response(
      *     response=201,
      *     description="create user by method Post"
@@ -78,7 +80,7 @@ class UserController extends AbstractController
     /**
      * @param string $id
      *
-     * @Route("/user/{id}",
+     * @Route("/users/{id}",
      *     name="_happy_edit_user",
      *     methods={"PATCH", "PUT"},
      *     requirements={
@@ -100,7 +102,7 @@ class UserController extends AbstractController
     /**
      * @param string $id
      *
-     * @Route("/user/{id}",
+     * @Route("/users/{id}",
      *     name="_happy_remove_user",
      *     methods={"DELETE"},
      *     requirements={

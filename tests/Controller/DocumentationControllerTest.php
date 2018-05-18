@@ -47,7 +47,19 @@ class DocumentationControllerTest extends AbstractTestCase
         $this->project->setId($uuid->toString());
     }
 
-    public function testGetProject()
+    public function testGetDocumentations()
+    {
+        // TEST Reponse 404 Not found
+        $path = $this->router->generate('_happy_get_documentations', ['projectId' => 'bad_project_id', 'id' => 'bad_id']);
+        $this->client->request('GET', $path);
+        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        // TEST Reponse 200 Ok
+        $path = $this->router->generate('_happy_get_documentations', ['projectId' => $this->project->getId()]);
+        $this->client->request('GET', $path);
+        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testGetDocumentation()
     {
         // TEST Reponse 404 Not found
         $path = $this->router->generate('_happy_get_documentation', ['projectId' => 'bad_project_id', 'id' => 'bad_id']);
@@ -59,10 +71,10 @@ class DocumentationControllerTest extends AbstractTestCase
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testPostProject()
+    public function testPostDocumentation()
     {
         // TEST Reponse 404 Not found
-        $path = $this->router->generate('_happy_post_documentation',['projectId' =>'bad_project_id']);
+        $path = $this->router->generate('_happy_post_documentation',['projectId' => 'bad_project_id']);
         $this->client->request('POST', $path);
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
         // TEST Reponse 201 Created
