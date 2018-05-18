@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1526587105">
-  <project timestamp="1526587105">
+<coverage generated="1526676070">
+  <project timestamp="1526676070">
     <package name="Happy\Command">
       <file name="/var/www/html/src/Command/SwaggerDumpCommand.php">
         <class name="Happy\Command\SwaggerDumpCommand" namespace="Happy\Command">
@@ -22,19 +22,19 @@
       </file>
     </package>
     <package name="Happy\Controller">
-      <file name="/var/www/html/src/Controller/DocumentController.php">
-        <class name="Happy\Controller\DocumentController" namespace="Happy\Controller">
+      <file name="/var/www/html/src/Controller/DocumentationController.php">
+        <class name="Happy\Controller\DocumentationController" namespace="Happy\Controller">
           <metrics complexity="5" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="10" coveredelements="8"/>
         </class>
-        <line num="42" type="method" name="getDocuments" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="42" type="method" name="getDocumentations" visibility="public" complexity="1" crap="2" count="0"/>
         <line num="44" type="stmt" count="0"/>
-        <line num="67" type="method" name="getDocument" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="67" type="method" name="getDocumentation" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="69" type="stmt" count="1"/>
-        <line num="92" type="method" name="postDocument" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="92" type="method" name="postDocumentation" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="94" type="stmt" count="1"/>
-        <line num="117" type="method" name="editDocument" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="117" type="method" name="editDocumentation" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="119" type="stmt" count="1"/>
-        <line num="141" type="method" name="removeDocument" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="141" type="method" name="removeDocumentation" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="143" type="stmt" count="1"/>
         <metrics loc="144" ncloc="36" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="10" coveredelements="8"/>
       </file>
