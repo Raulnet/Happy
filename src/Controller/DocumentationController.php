@@ -15,17 +15,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
 
 /**
- * Class DocumentController.
+ * Class DocumentationController.
  *
  * @Route("/api")
  */
-class DocumentController extends AbstractController
+class DocumentationController extends AbstractController
 {
     /**
      * @param string $projectId
      *
-     * @Route("/project/{projectId}/document",
-     *     name="_happy_get_documents",
+     * @Route("/project/{projectId}/documentation",
+     *     name="_happy_get_documentations",
      *     methods={"GET"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
@@ -33,13 +33,13 @@ class DocumentController extends AbstractController
      *     )
      * @SWG\Response(
      *     response=200,
-     *     description="Return all document"
+     *     description="Return all documentation"
      * )
-     * @SWG\Tag(name="document")
+     * @SWG\Tag(name="documentation")
      *
      * @return JsonResponse
      */
-    public function getDocuments(string $projectId)
+    public function getDocumentations(string $projectId)
     {
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
@@ -48,8 +48,8 @@ class DocumentController extends AbstractController
      * @param string $projectId
      * @param string $id
      *
-     * @Route("/project/{projectId}/document/{id}",
-     *     name="_happy_get_document",
+     * @Route("/project/{projectId}/documentation/{id}",
+     *     name="_happy_get_documentation",
      *     methods={"GET"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
@@ -58,13 +58,13 @@ class DocumentController extends AbstractController
      *     )
      * @SWG\Response(
      *     response=200,
-     *     description="Return document by id"
+     *     description="Return documentation by id"
      * )
-     * @SWG\Tag(name="document")
+     * @SWG\Tag(name="documentation")
      *
      * @return JsonResponse
      */
-    public function getDocument(string $projectId, string $id)
+    public function getDocumentation(string $projectId, string $id)
     {
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
@@ -73,8 +73,8 @@ class DocumentController extends AbstractController
      * @param string  $projectId
      * @param Request $request
      *
-     * @Route("/project/{projectId}/document",
-     *     name="_happy_post_document",
+     * @Route("/project/{projectId}/documentation",
+     *     name="_happy_post_documentation",
      *     methods={"POST"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
@@ -83,13 +83,13 @@ class DocumentController extends AbstractController
      * )
      * @SWG\Response(
      *     response=201,
-     *     description="create document by method Post"
+     *     description="create documentation by method Post"
      * )
-     * @SWG\Tag(name="document")
+     * @SWG\Tag(name="documentation")
      *
      * @return JsonResponse
      */
-    public function postDocument(Request $request, string $projectId)
+    public function postDocumentation(Request $request, string $projectId)
     {
         return new JsonResponse(null, JsonResponse::HTTP_CREATED);
     }
@@ -98,8 +98,8 @@ class DocumentController extends AbstractController
      * @param string $projectId
      * @param string $id
      *
-     * @Route("/project/{projectId}/document/{id}",
-     *     name="_happy_edit_document",
+     * @Route("/project/{projectId}/documentation/{id}",
+     *     name="_happy_edit_documentation",
      *     methods={"PATCH", "PUT"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
@@ -108,13 +108,13 @@ class DocumentController extends AbstractController
      *     )
      * @SWG\Response(
      *     response=200,
-     *     description="Edit Document by methods PATCH/PUT"
+     *     description="Edit Documentation by methods PATCH/PUT"
      * )
-     * @SWG\Tag(name="document")
+     * @SWG\Tag(name="documentation")
      *
      * @return JsonResponse
      */
-    public function editDocument(string $projectId, string $id)
+    public function editDocumentation(string $projectId, string $id)
     {
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
@@ -122,8 +122,8 @@ class DocumentController extends AbstractController
     /**
      * @param string $id
      *
-     * @Route("/project/{projectId}/document/{id}",
-     *     name="_happy_remove_document",
+     * @Route("/project/{projectId}/documentation/{id}",
+     *     name="_happy_remove_documentation",
      *     methods={"DELETE"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
@@ -134,11 +134,11 @@ class DocumentController extends AbstractController
      *     response=200,
      *     description="Remove (soft delete) User by method DELETE"
      * )
-     * @SWG\Tag(name="document")
+     * @SWG\Tag(name="documentation")
      *
      * @return JsonResponse
      */
-    public function removeDocument($id)
+    public function removeDocumentation($id)
     {
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
