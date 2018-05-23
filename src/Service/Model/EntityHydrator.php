@@ -8,7 +8,9 @@
 
 namespace Happy\Service\Model;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Class EntityHydrator
@@ -52,6 +54,9 @@ class EntityHydrator
     public function handleRequest(object $entity, Request $request): object
     {
         $content = $request->getContent();
+        if (empty($content)) {
+            throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.no.body.content.submit');
+        }
         $propertiesValues = json_decode($content, true)[$this->name];
         foreach ($propertiesValues as $property => $value) {
 

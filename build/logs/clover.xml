@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527112105">
-  <project timestamp="1527112105">
+<coverage generated="1527117274">
+  <project timestamp="1527117274">
     <package name="Happy\Command">
       <file name="/var/www/html/src/Command/SwaggerDumpCommand.php">
         <class name="Happy\Command\SwaggerDumpCommand" namespace="Happy\Command">
@@ -26,16 +26,16 @@
         <class name="Happy\Controller\AbstractApiController" namespace="Happy\Controller">
           <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
         </class>
-        <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="36" type="stmt" count="5"/>
-        <line num="37" type="stmt" count="5"/>
-        <line num="38" type="stmt" count="5"/>
-        <line num="46" type="method" name="apiJsonResponse" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="48" type="stmt" count="5"/>
-        <line num="49" type="stmt" count="5"/>
-        <line num="50" type="stmt" count="5"/>
-        <line num="51" type="stmt" count="5"/>
-        <line num="53" type="stmt" count="5"/>
+        <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
+        <line num="36" type="stmt" count="9"/>
+        <line num="37" type="stmt" count="9"/>
+        <line num="38" type="stmt" count="9"/>
+        <line num="46" type="method" name="apiJsonResponse" visibility="public" complexity="1" crap="1" count="9"/>
+        <line num="48" type="stmt" count="9"/>
+        <line num="49" type="stmt" count="9"/>
+        <line num="50" type="stmt" count="9"/>
+        <line num="51" type="stmt" count="9"/>
+        <line num="53" type="stmt" count="9"/>
         <metrics loc="54" ncloc="31" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
       </file>
       <file name="/var/www/html/src/Controller/DocumentationController.php">
@@ -73,17 +73,27 @@
       </file>
       <file name="/var/www/html/src/Controller/ProjectController.php">
         <class name="Happy\Controller\ProjectController" namespace="Happy\Controller">
-          <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+          <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
         </class>
         <line num="42" type="method" name="getProject" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="43" type="stmt" count="1"/>
-        <line num="58" type="method" name="postProject" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="59" type="stmt" count="1"/>
-        <line num="81" type="method" name="editProject" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="82" type="stmt" count="1"/>
-        <line num="103" type="method" name="removeProject" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="104" type="stmt" count="1"/>
-        <metrics loc="105" ncloc="28" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="8" coveredelements="8"/>
+        <line num="44" type="stmt" count="1"/>
+        <line num="60" type="method" name="postProject" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="62" type="stmt" count="4"/>
+        <line num="63" type="stmt" count="4"/>
+        <line num="64" type="stmt" count="4"/>
+        <line num="65" type="stmt" count="4"/>
+        <line num="92" type="method" name="editProject" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="94" type="stmt" count="1"/>
+        <line num="95" type="stmt" count="1"/>
+        <line num="96" type="stmt" count="1"/>
+        <line num="97" type="stmt" count="1"/>
+        <line num="98" type="stmt" count="1"/>
+        <line num="120" type="method" name="removeProject" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="122" type="stmt" count="1"/>
+        <line num="123" type="stmt" count="1"/>
+        <line num="124" type="stmt" count="1"/>
+        <line num="125" type="stmt" count="1"/>
+        <metrics loc="126" ncloc="42" classes="1" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="18" coveredelements="18"/>
       </file>
       <file name="/var/www/html/src/Controller/UserController.php">
         <class name="Happy\Controller\UserController" namespace="Happy\Controller">
@@ -144,21 +154,21 @@
         <class name="Happy\Entity\Project" namespace="Happy\Entity">
           <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="15" coveredelements="15"/>
         </class>
-        <line num="59" type="method" name="getId" visibility="public" complexity="1" crap="1" count="9"/>
-        <line num="61" type="stmt" count="9"/>
+        <line num="59" type="method" name="getId" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="61" type="stmt" count="6"/>
         <line num="67" type="method" name="setId" visibility="public" complexity="1" crap="1" count="10"/>
         <line num="69" type="stmt" count="10"/>
         <line num="70" type="stmt" count="10"/>
         <line num="75" type="method" name="getName" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="77" type="stmt" count="1"/>
-        <line num="83" type="method" name="setName" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="85" type="stmt" count="1"/>
-        <line num="86" type="stmt" count="1"/>
+        <line num="83" type="method" name="setName" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="85" type="stmt" count="5"/>
+        <line num="86" type="stmt" count="5"/>
         <line num="91" type="method" name="getUrlDocumentation" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="93" type="stmt" count="1"/>
-        <line num="99" type="method" name="setUrlDocumentation" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="101" type="stmt" count="1"/>
-        <line num="102" type="stmt" count="1"/>
+        <line num="99" type="method" name="setUrlDocumentation" visibility="public" complexity="1" crap="1" count="5"/>
+        <line num="101" type="stmt" count="5"/>
+        <line num="102" type="stmt" count="5"/>
         <metrics loc="103" ncloc="47" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="9" elements="15" coveredelements="15"/>
       </file>
       <file name="/var/www/html/src/Entity/User.php">
@@ -217,11 +227,11 @@
         <class name="TimestampableTrait" namespace="Happy\Entity\Traits">
           <metrics complexity="13" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="22" coveredelements="22"/>
         </class>
-        <line num="43" type="method" name="autoUpdate" visibility="public" complexity="2" crap="2" count="5"/>
-        <line num="45" type="stmt" count="5"/>
-        <line num="46" type="stmt" count="5"/>
-        <line num="48" type="stmt" count="5"/>
-        <line num="49" type="stmt" count="5"/>
+        <line num="43" type="method" name="autoUpdate" visibility="public" complexity="2" crap="2" count="9"/>
+        <line num="45" type="stmt" count="9"/>
+        <line num="46" type="stmt" count="9"/>
+        <line num="48" type="stmt" count="9"/>
+        <line num="49" type="stmt" count="9"/>
         <line num="54" type="method" name="getDateCreation" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="56" type="stmt" count="2"/>
         <line num="62" type="method" name="setDateCreation" visibility="public" complexity="1" crap="1" count="1"/>
@@ -229,14 +239,14 @@
         <line num="65" type="stmt" count="1"/>
         <line num="70" type="method" name="getDateUpdate" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="72" type="stmt" count="2"/>
-        <line num="78" type="method" name="setDateUpdate" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="80" type="stmt" count="1"/>
-        <line num="81" type="stmt" count="1"/>
+        <line num="78" type="method" name="setDateUpdate" visibility="public" complexity="1" crap="1" count="2"/>
+        <line num="80" type="stmt" count="2"/>
+        <line num="81" type="stmt" count="2"/>
         <line num="86" type="method" name="getDateDeleted" visibility="public" complexity="2" crap="2" count="2"/>
         <line num="88" type="stmt" count="2"/>
-        <line num="94" type="method" name="setDateDeleted" visibility="public" complexity="2" crap="2" count="3"/>
-        <line num="96" type="stmt" count="3"/>
-        <line num="97" type="stmt" count="3"/>
+        <line num="94" type="method" name="setDateDeleted" visibility="public" complexity="2" crap="2" count="4"/>
+        <line num="96" type="stmt" count="4"/>
+        <line num="97" type="stmt" count="4"/>
         <line num="102" type="method" name="isDeleted" visibility="public" complexity="1" crap="1" count="1"/>
         <line num="104" type="stmt" count="1"/>
         <metrics loc="105" ncloc="54" classes="1" methods="8" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="14" elements="22" coveredelements="22"/>
@@ -290,9 +300,9 @@
         <class name="Happy\Repository\ProjectRepository" namespace="Happy\Repository">
           <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
         </class>
-        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="27" type="stmt" count="1"/>
-        <line num="28" type="stmt" count="1"/>
+        <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
+        <line num="27" type="stmt" count="4"/>
+        <line num="28" type="stmt" count="4"/>
         <metrics loc="28" ncloc="14" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
       </file>
       <file name="/var/www/html/src/Repository/UserRepository.php">
@@ -321,41 +331,41 @@
         <class name="Happy\Service\NormalizerService" namespace="Happy\Service" fullPackage="Happy" package="Happy">
           <metrics complexity="11" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="30" elements="35" coveredelements="32"/>
         </class>
-        <line num="33" type="method" name="getHydrator" visibility="public" complexity="2" crap="2" count="4"/>
-        <line num="35" type="stmt" count="4"/>
-        <line num="36" type="stmt" count="4"/>
-        <line num="37" type="stmt" count="4"/>
-        <line num="38" type="stmt" count="4"/>
-        <line num="39" type="stmt" count="1"/>
-        <line num="40" type="stmt" count="1"/>
-        <line num="43" type="stmt" count="4"/>
-        <line num="53" type="method" name="getReflexionProperties" visibility="private" complexity="4" crap="4" count="1"/>
-        <line num="55" type="stmt" count="1"/>
-        <line num="56" type="stmt" count="1"/>
-        <line num="57" type="stmt" count="1"/>
-        <line num="58" type="stmt" count="1"/>
-        <line num="59" type="stmt" count="1"/>
-        <line num="60" type="stmt" count="1"/>
-        <line num="61" type="stmt" count="1"/>
-        <line num="66" type="stmt" count="1"/>
-        <line num="78" type="method" name="getProperty" visibility="private" complexity="5" crap="5.04" count="1"/>
-        <line num="80" type="stmt" count="1"/>
-        <line num="82" type="stmt" count="1"/>
-        <line num="83" type="stmt" count="1"/>
-        <line num="84" type="stmt" count="1"/>
-        <line num="86" type="stmt" count="1"/>
-        <line num="87" type="stmt" count="1"/>
-        <line num="88" type="stmt" count="1"/>
-        <line num="89" type="stmt" count="1"/>
-        <line num="91" type="stmt" count="1"/>
+        <line num="33" type="method" name="getHydrator" visibility="public" complexity="2" crap="2" count="8"/>
+        <line num="35" type="stmt" count="8"/>
+        <line num="36" type="stmt" count="8"/>
+        <line num="37" type="stmt" count="8"/>
+        <line num="38" type="stmt" count="8"/>
+        <line num="39" type="stmt" count="2"/>
+        <line num="40" type="stmt" count="2"/>
+        <line num="43" type="stmt" count="8"/>
+        <line num="53" type="method" name="getReflexionProperties" visibility="private" complexity="4" crap="4" count="2"/>
+        <line num="55" type="stmt" count="2"/>
+        <line num="56" type="stmt" count="2"/>
+        <line num="57" type="stmt" count="2"/>
+        <line num="58" type="stmt" count="2"/>
+        <line num="59" type="stmt" count="2"/>
+        <line num="60" type="stmt" count="2"/>
+        <line num="61" type="stmt" count="2"/>
+        <line num="66" type="stmt" count="2"/>
+        <line num="78" type="method" name="getProperty" visibility="private" complexity="5" crap="5.04" count="2"/>
+        <line num="80" type="stmt" count="2"/>
+        <line num="82" type="stmt" count="2"/>
+        <line num="83" type="stmt" count="2"/>
+        <line num="84" type="stmt" count="2"/>
+        <line num="86" type="stmt" count="2"/>
+        <line num="87" type="stmt" count="2"/>
+        <line num="88" type="stmt" count="2"/>
+        <line num="89" type="stmt" count="2"/>
+        <line num="91" type="stmt" count="2"/>
         <line num="92" type="stmt" count="1"/>
         <line num="93" type="stmt" count="1"/>
         <line num="94" type="stmt" count="1"/>
-        <line num="96" type="stmt" count="1"/>
+        <line num="96" type="stmt" count="2"/>
         <line num="97" type="stmt" count="0"/>
         <line num="98" type="stmt" count="0"/>
-        <line num="99" type="stmt" count="1"/>
-        <line num="104" type="stmt" count="1"/>
+        <line num="99" type="stmt" count="2"/>
+        <line num="104" type="stmt" count="2"/>
         <metrics loc="105" ncloc="69" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="30" elements="35" coveredelements="32"/>
       </file>
       <file name="/var/www/html/src/Service/SerializerService.php">
@@ -365,8 +375,8 @@
         <line num="26" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="17"/>
         <line num="28" type="stmt" count="17"/>
         <line num="29" type="stmt" count="17"/>
-        <line num="34" type="method" name="getSerializer" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="36" type="stmt" count="5"/>
+        <line num="34" type="method" name="getSerializer" visibility="public" complexity="1" crap="1" count="9"/>
+        <line num="36" type="stmt" count="9"/>
         <metrics loc="37" ncloc="19" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="5" coveredelements="5"/>
       </file>
       <file name="/var/www/html/src/Service/SwaggerDumpService.php">
@@ -393,22 +403,22 @@
         <line num="30" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="16"/>
         <line num="32" type="stmt" count="16"/>
         <line num="33" type="stmt" count="16"/>
-        <line num="43" type="method" name="apply" visibility="public" complexity="5" crap="5.01" count="4"/>
-        <line num="45" type="stmt" count="4"/>
-        <line num="46" type="stmt" count="4"/>
-        <line num="48" type="stmt" count="4"/>
-        <line num="49" type="stmt" count="3"/>
-        <line num="50" type="stmt" count="3"/>
-        <line num="53" type="stmt" count="4"/>
-        <line num="54" type="stmt" count="4"/>
+        <line num="43" type="method" name="apply" visibility="public" complexity="5" crap="5.01" count="8"/>
+        <line num="45" type="stmt" count="8"/>
+        <line num="46" type="stmt" count="8"/>
+        <line num="48" type="stmt" count="8"/>
+        <line num="49" type="stmt" count="6"/>
+        <line num="50" type="stmt" count="6"/>
+        <line num="53" type="stmt" count="8"/>
+        <line num="54" type="stmt" count="8"/>
         <line num="55" type="stmt" count="1"/>
-        <line num="57" type="stmt" count="4"/>
-        <line num="60" type="stmt" count="4"/>
+        <line num="57" type="stmt" count="8"/>
+        <line num="60" type="stmt" count="8"/>
         <line num="61" type="stmt" count="0"/>
-        <line num="63" type="stmt" count="4"/>
-        <line num="64" type="stmt" count="4"/>
-        <line num="71" type="method" name="supports" visibility="public" complexity="1" crap="1" count="11"/>
-        <line num="73" type="stmt" count="11"/>
+        <line num="63" type="stmt" count="8"/>
+        <line num="64" type="stmt" count="8"/>
+        <line num="71" type="method" name="supports" visibility="public" complexity="1" crap="1" count="12"/>
+        <line num="73" type="stmt" count="12"/>
         <metrics loc="74" ncloc="46" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="15" elements="19" coveredelements="17"/>
       </file>
       <file name="/var/www/html/src/Service/Converter/EntityConverterService.php">
@@ -420,14 +430,14 @@
         <line num="46" type="stmt" count="16"/>
         <line num="47" type="stmt" count="16"/>
         <line num="49" type="stmt" count="16"/>
-        <line num="60" type="method" name="buildEntity" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="62" type="stmt" count="4"/>
-        <line num="63" type="stmt" count="4"/>
-        <line num="72" type="method" name="findEntity" visibility="public" complexity="2" crap="2.06" count="3"/>
-        <line num="74" type="stmt" count="3"/>
-        <line num="75" type="stmt" count="3"/>
+        <line num="60" type="method" name="buildEntity" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="62" type="stmt" count="8"/>
+        <line num="63" type="stmt" count="8"/>
+        <line num="72" type="method" name="findEntity" visibility="public" complexity="2" crap="2.06" count="6"/>
+        <line num="74" type="stmt" count="6"/>
+        <line num="75" type="stmt" count="6"/>
         <line num="76" type="stmt" count="0"/>
-        <line num="78" type="stmt" count="3"/>
+        <line num="78" type="stmt" count="6"/>
         <metrics loc="79" ncloc="45" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="9" elements="13" coveredelements="11"/>
       </file>
     </package>
@@ -473,50 +483,52 @@
     <package name="Happy\Service\Model">
       <file name="/var/www/html/src/Service/Model/EntityHydrator.php">
         <class name="Happy\Service\Model\EntityHydrator" namespace="Happy\Service\Model" fullPackage="Happy" package="Happy">
-          <metrics complexity="12" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="25" elements="39" coveredelements="27"/>
+          <metrics complexity="13" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="33" elements="41" coveredelements="35"/>
         </class>
-        <line num="38" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="4"/>
-        <line num="40" type="stmt" count="4"/>
-        <line num="41" type="stmt" count="4"/>
-        <line num="42" type="stmt" count="4"/>
-        <line num="43" type="stmt" count="4"/>
-        <line num="52" type="method" name="handleRequest" visibility="public" complexity="9" crap="14.48" count="4"/>
-        <line num="54" type="stmt" count="4"/>
-        <line num="55" type="stmt" count="4"/>
-        <line num="56" type="stmt" count="4"/>
-        <line num="58" type="stmt" count="4"/>
-        <line num="60" type="stmt" count="4"/>
-        <line num="61" type="stmt" count="4"/>
-        <line num="63" type="stmt" count="4"/>
-        <line num="64" type="stmt" count="4"/>
-        <line num="65" type="stmt" count="4"/>
-        <line num="66" type="stmt" count="4"/>
-        <line num="67" type="stmt" count="4"/>
-        <line num="68" type="stmt" count="4"/>
-        <line num="69" type="stmt" count="4"/>
-        <line num="70" type="stmt" count="4"/>
-        <line num="71" type="stmt" count="0"/>
-        <line num="72" type="stmt" count="0"/>
-        <line num="73" type="stmt" count="0"/>
-        <line num="74" type="stmt" count="0"/>
-        <line num="75" type="stmt" count="0"/>
-        <line num="76" type="stmt" count="0"/>
+        <line num="40" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+        <line num="42" type="stmt" count="8"/>
+        <line num="43" type="stmt" count="8"/>
+        <line num="44" type="stmt" count="8"/>
+        <line num="45" type="stmt" count="8"/>
+        <line num="54" type="method" name="handleRequest" visibility="public" complexity="10" crap="10.51" count="8"/>
+        <line num="56" type="stmt" count="8"/>
+        <line num="57" type="stmt" count="8"/>
+        <line num="58" type="stmt" count="1"/>
+        <line num="60" type="stmt" count="8"/>
+        <line num="61" type="stmt" count="8"/>
+        <line num="63" type="stmt" count="8"/>
+        <line num="65" type="stmt" count="8"/>
+        <line num="66" type="stmt" count="8"/>
+        <line num="68" type="stmt" count="8"/>
+        <line num="69" type="stmt" count="8"/>
+        <line num="70" type="stmt" count="8"/>
+        <line num="71" type="stmt" count="8"/>
+        <line num="72" type="stmt" count="8"/>
+        <line num="73" type="stmt" count="5"/>
+        <line num="74" type="stmt" count="4"/>
+        <line num="75" type="stmt" count="4"/>
+        <line num="76" type="stmt" count="1"/>
         <line num="77" type="stmt" count="0"/>
         <line num="78" type="stmt" count="0"/>
-        <line num="79" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="1"/>
         <line num="80" type="stmt" count="0"/>
-        <line num="81" type="stmt" count="0"/>
-        <line num="83" type="stmt" count="4"/>
-        <line num="87" type="stmt" count="4"/>
-        <line num="95" type="method" name="getLabelProperty" visibility="private" complexity="2" crap="2" count="4"/>
-        <line num="97" type="stmt" count="4"/>
-        <line num="98" type="stmt" count="4"/>
-        <line num="99" type="stmt" count="4"/>
-        <line num="100" type="stmt" count="4"/>
-        <line num="103" type="stmt" count="4"/>
-        <metrics loc="106" ncloc="71" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="36" coveredstatements="25" elements="39" coveredelements="27"/>
+        <line num="81" type="stmt" count="1"/>
+        <line num="82" type="stmt" count="1"/>
+        <line num="83" type="stmt" count="1"/>
+        <line num="84" type="stmt" count="1"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="86" type="stmt" count="0"/>
+        <line num="88" type="stmt" count="8"/>
+        <line num="92" type="stmt" count="8"/>
+        <line num="100" type="method" name="getLabelProperty" visibility="private" complexity="2" crap="2" count="8"/>
+        <line num="102" type="stmt" count="8"/>
+        <line num="103" type="stmt" count="8"/>
+        <line num="104" type="stmt" count="8"/>
+        <line num="105" type="stmt" count="8"/>
+        <line num="108" type="stmt" count="8"/>
+        <metrics loc="111" ncloc="76" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="33" elements="41" coveredelements="35"/>
       </file>
     </package>
-    <metrics files="23" loc="1828" ncloc="945" classes="23" methods="90" coveredmethods="86" conditionals="0" coveredconditionals="0" statements="268" coveredstatements="253" elements="358" coveredelements="339"/>
+    <metrics files="23" loc="1854" ncloc="964" classes="23" methods="90" coveredmethods="86" conditionals="0" coveredconditionals="0" statements="280" coveredstatements="271" elements="370" coveredelements="357"/>
   </project>
 </coverage>
