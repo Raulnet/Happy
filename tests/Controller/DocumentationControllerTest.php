@@ -50,7 +50,7 @@ class DocumentationControllerTest extends AbstractTestCase
     public function testGetDocumentations()
     {
         // TEST Reponse 404 Not found
-        $path = $this->router->generate('_happy_get_documentations', ['projectId' => 'bad_project_id', 'id' => 'bad_id']);
+        $path = $this->router->generate('_happy_get_documentations', ['projectId' => 'bad_project_id']);
         $this->client->request('GET', $path);
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
         // TEST Reponse 200 Ok

@@ -36,14 +36,16 @@ class BodyConverter implements ParamConverterInterface
      * @param Request        $request
      * @param ParamConverter $configuration
      *
-     * @throws \Exception
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function apply(Request $request, ParamConverter $configuration): void
     {
         $name   = $configuration->getName();
         $object = null;
 
-        if (in_array($request->getMethod(), ['GET', 'DELETE', 'PATH', 'PUT'])) {
+        if (in_array($request->getMethod(), ['GET', 'DELETE', 'PATCH', 'PUT'])) {
             $id     = $request->get('id');
             $object = $this->entityConverterService->findEntity($configuration->getClass(), $id);
         }
@@ -68,6 +70,6 @@ class BodyConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration)
     {
-        return true;
+        return (bool)$configuration->getClass();
     }
 }
