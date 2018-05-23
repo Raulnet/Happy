@@ -1,0 +1,15 @@
+services:
+    normalizer.service:
+        class: Happy\Service\NormalizerService
+    entity.converter.service:
+        class: Happy\Service\Converter\EntityConverterService
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@serializer.service"
+            - "@normalizer.service"
+    body.converter:
+        class:        Happy\Service\Converter\BodyConverter
+        arguments:
+            - "@entity.converter.service"
+        tags:
+            - { name: request.param_converter, priority: -2, converter: body.converter }

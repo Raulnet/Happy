@@ -1,5 +1,6 @@
 imports:
     - { resource: packages/mock_parameters.yaml}
+    - { resource: ./services_converter.yaml}
 
 parameters:
 
@@ -28,6 +29,9 @@ services:
     # please note that last definitions always *replace* previous ones
     Happy\Service\SwaggerDumpService:
         arguments: ["@nelmio_api_doc.generator"]
+
+    serializer.service:
+        class: Happy\Service\SerializerService
 
     Happy\Service\EventListener\ExceptionListener:
         tags:

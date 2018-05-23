@@ -9,6 +9,7 @@
 namespace Happy\Controller;
 
 use Happy\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,14 +35,15 @@ class UserController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function getUsers(): JsonResponse {
+    public function getUsers(): JsonResponse
+    {
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->apiJsonResponse($users);
     }
 
     /**
-     * @param string $id
+     * @param User $user
      * @Route("/users/{id}",
      *     name="_happy_get_user",
      *     methods={"GET"},
@@ -49,6 +51,7 @@ class UserController extends AbstractApiController
      *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
+     * @ParamConverter("user", class="Happy\Entity\User")
      * @SWG\Response(
      *     response=200,
      *     description="Return user by id"
@@ -57,14 +60,16 @@ class UserController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function getUserById($id): JsonResponse {
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+    public function getUserById(User $user): JsonResponse
+    {
+        return $this->apiJsonResponse($user, JsonResponse::HTTP_OK);
     }
 
     /**
-     * @param Request $request
+     * @param User $user
      *
      * @Route("/users", name="_happy_post_user", methods={"POST"})
+     * @ParamConverter("user", converter="body.converter", class="Happy\Entity\User")
      * @SWG\Response(
      *     response=201,
      *     description="create user by method Post"
@@ -73,12 +78,18 @@ class UserController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function postUser(Request $request): JsonResponse {
-        return new JsonResponse(null, JsonResponse::HTTP_CREATED);
+    public function postUser(User $user): JsonResponse
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($user);
+        $manager->flush();
+
+        return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
     }
 
     /**
-     * @param string $id
+     * @param Request $request
+     * @param User    $user
      *
      * @Route("/users/{id}",
      *     name="_happy_edit_user",
@@ -87,6 +98,7 @@ class UserController extends AbstractApiController
      *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
+     * @ParamConverter("user", converter="body.converter", class="Happy\Entity\User")
      * @SWG\Response(
      *     response=200,
      *     description="Edit User by methods PATCH/PUT"
@@ -94,13 +106,23 @@ class UserController extends AbstractApiController
      * @SWG\Tag(name="user")
      *
      * @return JsonResponse
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
-    public function editUser($id): JsonResponse {
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+    public function editUser(Request $request, User $user): JsonResponse
+    {
+        $hydrator = $this->normalizer->getHydrator(User::class);
+        $hydrator->handleRequest($user,$request);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        return $this->apiJsonResponse(null, JsonResponse::HTTP_OK);
     }
 
     /**
-     * @param string $id
+     * @param User $user
      *
      * @Route("/users/{id}",
      *     name="_happy_remove_user",
@@ -117,7 +139,12 @@ class UserController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function removeUser($id): JsonResponse {
+    public function removeUser(User $user): JsonResponse
+    {
+        $user->setDateDeleted(new \DateTime('now'));
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
 }

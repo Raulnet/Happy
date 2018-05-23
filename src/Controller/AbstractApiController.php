@@ -8,6 +8,7 @@
 
 namespace Happy\Controller;
 
+use Happy\Service\NormalizerService;
 use Happy\Service\SerializerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,19 +20,21 @@ abstract class AbstractApiController extends AbstractController
 {
     const FORMAT_JSON = 'json';
 
-    /**
-     * @var \JMS\Serializer\Serializer
-     */
+    /** @var \JMS\Serializer\Serializer  */
     private $serializer;
+    /** @var NormalizerService */
+    protected $normalizer;
 
     /**
      * AbstractApiController constructor.
      *
      * @param SerializerService $serializerService
+     * @param NormalizerService $normalizerService
      */
-    public function __construct(SerializerService $serializerService)
+    public function __construct(SerializerService $serializerService, NormalizerService $normalizerService)
     {
         $this->serializer = $serializerService->getSerializer();
+        $this->normalizer = $normalizerService;
     }
 
     /**
