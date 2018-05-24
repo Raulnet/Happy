@@ -20,7 +20,7 @@ abstract class AbstractApiController extends AbstractController
 {
     const FORMAT_JSON = 'json';
 
-    /** @var \JMS\Serializer\Serializer  */
+    /** @var \JMS\Serializer\Serializer */
     private $serializer;
     /** @var NormalizerService */
     protected $normalizer;

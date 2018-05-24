@@ -42,13 +42,8 @@ class BodyConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration): void
     {
-        $name   = $configuration->getName();
+        $name = $configuration->getName();
         $object = null;
-
-        if (in_array($request->getMethod(), ['GET', 'DELETE', 'PATCH', 'PUT'])) {
-            $id     = $request->get('id');
-            $object = $this->entityConverterService->findEntity($configuration->getClass(), $id);
-        }
 
         if ('POST' === $request->getMethod()) {
             if (empty($request->getContent())) {
@@ -58,7 +53,7 @@ class BodyConverter implements ParamConverterInterface
         }
 
         if (empty($object)) {
-            throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.' . $name . '.not.converted');
+            throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.'.$name.'.not.converted');
         }
         $request->attributes->set($name, $object);
     }
@@ -70,6 +65,6 @@ class BodyConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration)
     {
-        return (bool)$configuration->getClass();
+        return (bool) $configuration->getConverter();
     }
 }

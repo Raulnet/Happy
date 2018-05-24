@@ -114,7 +114,7 @@ class UserController extends AbstractApiController
     public function editUser(Request $request, User $user): JsonResponse
     {
         $hydrator = $this->normalizer->getHydrator(User::class);
-        $hydrator->handleRequest($user,$request);
+        $hydrator->handleRequest($user, $request);
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
 

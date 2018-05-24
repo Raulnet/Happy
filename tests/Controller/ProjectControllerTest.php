@@ -59,7 +59,7 @@ class ProjectControllerTest extends WebTestCase
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path, [], [], [], json_encode($project));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-        
+
         // TEST Reponse 404 Not found
         $path = $this->router->generate('_happy_get_project', ['id' => 'bad_id']);
         $this->client->request('GET', $path);
@@ -70,11 +70,8 @@ class ProjectControllerTest extends WebTestCase
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
 
-
-
     public function testEditProject()
     {
-
         $project = ['project' => ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000']];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_project');
@@ -106,7 +103,6 @@ class ProjectControllerTest extends WebTestCase
 
     public function testRemoveProject()
     {
-
         $project = ['project' => ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000']];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_project');

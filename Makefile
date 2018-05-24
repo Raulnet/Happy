@@ -36,8 +36,8 @@ rebuild:
 	chown -R www-data ./var/cache
 
 php-fixer:
-	php-cs-fixer fix ./src -vvv --rules=@Symfony,-@PSR2
-	php-cs-fixer fix ./tests -vvv --rules=@Symfony,-@PSR2
+	php-cs-fixer fix ./src -vvv --rules=@Symfony
+	php-cs-fixer fix ./tests -vvv --rules=@Symfony
 
 docker-reboot:
 	/etc/init.d/docker restart

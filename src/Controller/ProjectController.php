@@ -62,6 +62,7 @@ class ProjectController extends AbstractApiController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($project);
         $manager->flush();
+
         return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
     }
 
@@ -85,6 +86,7 @@ class ProjectController extends AbstractApiController
      * @SWG\Tag(name="project")
      *
      * @return JsonResponse
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -95,6 +97,7 @@ class ProjectController extends AbstractApiController
         $hydrator->handleRequest($project, $request);
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
+
         return $this->apiJsonResponse(null, JsonResponse::HTTP_OK);
     }
 
@@ -122,6 +125,7 @@ class ProjectController extends AbstractApiController
         $project->setDateDeleted(new \DateTime('now'));
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
+
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
 }

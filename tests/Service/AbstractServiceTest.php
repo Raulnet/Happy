@@ -18,7 +18,8 @@ class AbstractServiceTest extends AbstractTestCase
 {
     const MESSAGE_ERROR = 'mock message error';
 
-    public function testLastError() {
+    public function testLastError()
+    {
         // use Default Service;
         $service = new SerializerService();
         $this->assertNull($service->lastError());

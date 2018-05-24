@@ -8,9 +8,12 @@
 
 namespace Happy\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Happy\Entity\Documentation;
+use Happy\Entity\Project;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
 
@@ -19,16 +22,16 @@ use Swagger\Annotations as SWG;
  *
  * @Route("/api")
  */
-class DocumentationController extends AbstractController
+class DocumentationController extends AbstractApiController
 {
     /**
-     * @param string $projectId
+     * @param Project $project
      *
-     * @Route("/projects/{projectId}/documentations",
+     * @Route("/projects/{id}/documentations",
      *     name="_happy_get_documentations",
      *     methods={"GET"},
      *     requirements={
-     *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
      * @SWG\Response(
@@ -39,16 +42,18 @@ class DocumentationController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function getDocumentations(string $projectId)
+    public function getDocumentations(Project $project)
     {
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);
+
+        return $this->apiJsonResponse($documentations, JsonResponse::HTTP_OK);
     }
 
     /**
-     * @param string $projectId
-     * @param string $id
+     * @param Project       $project
+     * @param Documentation $documentation
      *
-     * @Route("/project/{projectId}/documentation/{id}",
+     * @Route("/projects/{projectId}/documentations/{documentationId}",
      *     name="_happy_get_documentation",
      *     methods={"GET"},
      *     requirements={
@@ -56,6 +61,8 @@ class DocumentationController extends AbstractController
      *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
+     * @ParamConverter("project", class="Happy\Entity\Project", options={"id"="projectId"})
+     * @ParamConverter("documentation", class="Happy\Entity\Documentation", options={"id"="documentationId"})
      * @SWG\Response(
      *     response=200,
      *     description="Return documentation by id"
@@ -64,23 +71,26 @@ class DocumentationController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function getDocumentation(string $projectId, string $id)
+    public function getDocumentation(Project $project, Documentation $documentation)
     {
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+        $this->support($project, $documentation);
+
+        return $this->apiJsonResponse($documentation, JsonResponse::HTTP_OK);
     }
 
     /**
-     * @param string  $projectId
-     * @param Request $request
+     * @param Project       $project
+     * @param Documentation $documentation
      *
-     * @Route("/project/{projectId}/documentation",
+     * @Route("/projects/{id}/documentations",
      *     name="_happy_post_documentation",
      *     methods={"POST"},
      *     requirements={
-     *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
      * )
+     * @ParamConverter("documentation", converter="body.converter", class="Happy\Entity\Documentation")
      * @SWG\Response(
      *     response=201,
      *     description="create documentation by method Post"
@@ -89,23 +99,31 @@ class DocumentationController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function postDocumentation(Request $request, string $projectId)
+    public function postDocumentation(Project $project, Documentation $documentation)
     {
+        $documentation->setProject($project);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($documentation);
+        $manager->flush();
+
         return new JsonResponse(null, JsonResponse::HTTP_CREATED);
     }
 
     /**
-     * @param string $projectId
-     * @param string $id
+     * @param Project       $project
+     * @param Documentation $documentation
      *
-     * @Route("/project/{projectId}/documentation/{id}",
+     * @Route("/projects/{projectId}/documentations/{documentationId}",
      *     name="_happy_edit_documentation",
      *     methods={"PATCH", "PUT"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
-     *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          "documentationId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
+     * @ParamConverter("project", class="Happy\Entity\Project", options={"id"="projectId"})
+     * @ParamConverter("documentation", class="Happy\Entity\Documentation", options={"id"="documentationId"})
+     *
      * @SWG\Response(
      *     response=200,
      *     description="Edit Documentation by methods PATCH/PUT"
@@ -113,9 +131,19 @@ class DocumentationController extends AbstractController
      * @SWG\Tag(name="documentation")
      *
      * @return JsonResponse
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
-    public function editDocumentation(string $projectId, string $id)
+    public function editDocumentation(Request $request, Project $project, Documentation $documentation)
     {
+        $this->support($project, $documentation);
+        $hydrator = $this->normalizer->getHydrator(Documentation::class);
+        $hydrator->handleRequest($documentation, $request);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
         return new JsonResponse(null, JsonResponse::HTTP_OK);
     }
 
@@ -141,5 +169,12 @@ class DocumentationController extends AbstractController
     public function removeDocumentation($id)
     {
         return new JsonResponse(null, JsonResponse::HTTP_OK);
+    }
+
+    private function support(Project $project, Documentation $documentation)
+    {
+        if ($project->getId() !== $documentation->getProject()->getId()) {
+            throw new HttpException(JsonResponse::HTTP_NOT_FOUND, 'http.exception.project.on.documentation.not.found');
+        }
     }
 }

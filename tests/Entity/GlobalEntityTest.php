@@ -101,6 +101,7 @@ class GlobalEntityTest extends AbstractTestCase
             case 'int':
                 $int = $this->buildType($entity, $label, 321);
                 $this->assertTrue(is_integer($int));
+                // no break
             case 'datetime':
                 $datetime = $this->buildType($entity, $label, new \DateTime('now'));
                 $this->assertTrue($datetime instanceof $datetime);

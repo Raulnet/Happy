@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
  */
 class SwaggerDumpService
 {
-    Const CONTROLLER_SWAGGER = 'nelmio_api_doc.controller.swagger';
+    const CONTROLLER_SWAGGER = 'nelmio_api_doc.controller.swagger';
 
     /**
      * @var ServiceLocator
@@ -28,8 +28,7 @@ class SwaggerDumpService
     public function __construct(ApiDocGenerator $generatorLocator)
     {
         $this->generatorLocator = new ServiceLocator([
-            'default' => function () use ($generatorLocator): ApiDocGenerator
-            {
+            'default' => function () use ($generatorLocator): ApiDocGenerator {
                 return $generatorLocator;
             },
         ]);

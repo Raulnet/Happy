@@ -30,7 +30,8 @@ class HealthController extends Controller
      *
      * @return JsonResponse
      */
-    public function health(): JsonResponse {
+    public function health(): JsonResponse
+    {
         return new JsonResponse('OK', JsonResponse::HTTP_OK);
     }
 }

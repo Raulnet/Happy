@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class EntityConverterService
 {
-    CONST ENTITY_KEY_ID = 'id';
+    const ENTITY_KEY_ID = 'id';
 
     /** @var EntityManagerInterface */
     private $manager;
@@ -42,10 +42,9 @@ class EntityConverterService
         SerializerService $serializerService,
         NormalizerService $normalizerService
     ) {
-        $this->manager           = $manager;
+        $this->manager = $manager;
         $this->serializerService = $serializerService;
-        $this->normalizer        = $normalizerService;
-
+        $this->normalizer = $normalizerService;
     }
 
     /**
@@ -53,6 +52,7 @@ class EntityConverterService
      * @param array  $data
      *
      * @return object
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
@@ -60,6 +60,7 @@ class EntityConverterService
     public function buildEntity(string $className, Request $request): object
     {
         $hydrator = $this->normalizer->getHydrator($className);
+
         return $hydrator->handleRequest(new $className(), $request);
     }
 
@@ -75,6 +76,7 @@ class EntityConverterService
         if (empty($entity)) {
             throw new HttpException(JsonResponse::HTTP_NOT_FOUND, 'http.exception.entity.not.found');
         }
+
         return $entity;
     }
 }

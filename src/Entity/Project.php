@@ -7,6 +7,7 @@
  */
 
 namespace Happy\Entity;
+
 use Happy\Entity\Traits\TimestampableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;

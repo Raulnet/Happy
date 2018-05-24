@@ -161,7 +161,7 @@ class User implements UserInterface
      */
     public function addProject(Project $project): void
     {
-        if(!$this->projects->contains($project)) {
+        if (!$this->projects->contains($project)) {
             $this->projects->add($project);
         }
     }
@@ -171,7 +171,7 @@ class User implements UserInterface
      */
     public function removeProject(Project $project): void
     {
-        if($this->projects->contains($project)) {
+        if ($this->projects->contains($project)) {
             $this->projects->removeElement($project);
         }
     }

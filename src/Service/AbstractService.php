@@ -29,7 +29,8 @@ abstract class AbstractService
     /**
      * @return null|string
      */
-    public function lastError() {
+    public function lastError()
+    {
         return $this->lastError;
     }
 }

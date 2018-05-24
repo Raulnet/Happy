@@ -10,6 +10,7 @@ namespace Happy\Service;
 
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\Serializer;
+
 /**
  * Class SerializerService.
  */

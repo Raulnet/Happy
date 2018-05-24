@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 23/05/18
- * Time: 22:03
+ * Time: 22:03.
  */
 
 namespace Happy\Service\Model;
@@ -13,9 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Class EntityHydrator
- *
- * @package Happy\Service\Model
+ * Class EntityHydrator.
  */
 class EntityHydrator
 {
@@ -39,8 +37,8 @@ class EntityHydrator
      */
     public function __construct(string $name, string $className, array $entityMapProperties)
     {
-        $this->name                = $name;
-        $this->className           = $className;
+        $this->name = $name;
+        $this->className = $className;
         $this->entityMapProperties = $entityMapProperties;
     }
 
@@ -49,6 +47,7 @@ class EntityHydrator
      * @param Request $request
      *
      * @return object
+     *
      * @throws \Exception
      */
     public function handleRequest(object $entity, Request $request): object
@@ -59,11 +58,10 @@ class EntityHydrator
         }
         $propertiesValues = json_decode($content, true)[$this->name];
         foreach ($propertiesValues as $property => $value) {
-
             $property = $this->getLabelProperty($property);
 
             $reflexionProperty = $this->entityMapProperties[$property];
-            $method            = 'set' . ucfirst($property);
+            $method = 'set'.ucfirst($property);
 
             if (method_exists($entity, $method)) {
                 switch ($reflexionProperty['type']) {
@@ -78,6 +76,7 @@ class EntityHydrator
                         break;
                     case 'int':
                         $entity->$method($value);
+                        // no break
                     case 'datetime':
                         $datetime = new \DateTime($value);
                         $entity->$method($datetime);
@@ -85,10 +84,11 @@ class EntityHydrator
                     case 'collection':
                         break;
                     default:
-                        throw new \Exception('Type: ' . $this->entityMapProperties['type'] . ' unknown');
+                        throw new \Exception('Type: '.$this->entityMapProperties['type'].' unknown');
                 }
             }
         }
+
         return $entity;
     }
 
@@ -100,13 +100,11 @@ class EntityHydrator
     private function getLabelProperty(string $dataNameProperty): string
     {
         $labelProperty = null;
-        $expStr        = explode('_', $dataNameProperty);
+        $expStr = explode('_', $dataNameProperty);
         foreach ($expStr as $value) {
             $labelProperty .= ucfirst($value);
         }
 
         return lcfirst($labelProperty);
     }
-
-
 }

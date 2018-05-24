@@ -28,7 +28,8 @@ class GlobalRepositoryTest extends AbstractTestCase
         $this->manager = $kernel->getContainer()->get('doctrine.orm.default_entity_manager');
     }
 
-    public function testEntityRepository() {
+    public function testEntityRepository()
+    {
         $entitiesMap = $this->dumpEntityProperties();
         foreach ($entitiesMap as $className => $annotations) {
             $this->annotationsTest($className, $annotations);
@@ -44,7 +45,7 @@ class GlobalRepositoryTest extends AbstractTestCase
     private function annotationsTest(string $className, array $annotations): void
     {
         foreach ($annotations as $annotation) {
-            if($annotation instanceof Entity) {
+            if ($annotation instanceof Entity) {
                 $entityRepository = $this->manager->getRepository($className);
                 $this->assertTrue($entityRepository instanceof EntityRepository);
             }

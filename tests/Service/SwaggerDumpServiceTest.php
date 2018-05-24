@@ -26,7 +26,8 @@ class SwaggerDumpServiceTest extends AbstractTestCase
         $this->generatorLocator = $kernel->getContainer()->get('nelmio_api_doc.generator');
     }
 
-    public function testGetSwaggerDoc() {
+    public function testGetSwaggerDoc()
+    {
         $swaggerDumpService = new SwaggerDumpService($this->generatorLocator);
         $doc = $swaggerDumpService->getSwaggerDoc();
 

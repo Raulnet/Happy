@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 23/05/18
- * Time: 21:23
+ * Time: 21:23.
  */
 
 namespace Happy\Service;
@@ -16,9 +16,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Happy\Service\Model\EntityHydrator;
 
 /**
- * Class NormalizerService
- *
- * @package Happy\Service
+ * Class NormalizerService.
  */
 class NormalizerService extends AbstractService
 {
@@ -26,33 +24,35 @@ class NormalizerService extends AbstractService
      * @param string $className
      *
      * @return EntityHydrator
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
     public function getHydrator(string $className): EntityHydrator
     {
-        $cache           = new FilesystemCache();
+        $cache = new FilesystemCache();
         $nameExploded = explode('\\', strtolower($className));
         $name = end($nameExploded);
-        if (!$cache->has('entity.map.properties.' . $name)) {
+        if (!$cache->has('entity.map.properties.'.$name)) {
             $entityMapProperty = $this->getReflexionProperties($className);
-            $cache->set('entity.map.properties.' . $name, $entityMapProperty);
+            $cache->set('entity.map.properties.'.$name, $entityMapProperty);
         }
 
-        return new EntityHydrator($name, $className, $cache->get('entity.map.properties.' . $name));
+        return new EntityHydrator($name, $className, $cache->get('entity.map.properties.'.$name));
     }
 
     /**
      * @param string $className
      *
      * @return array
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \ReflectionException
      */
     private function getReflexionProperties(string $className)
     {
-        $classMethods    = get_class_methods($className);
+        $classMethods = get_class_methods($className);
         $classProperties = [];
         foreach ($classMethods as $classMethod) {
             if (preg_match('/^get?/i', $classMethod)) {
@@ -64,7 +64,6 @@ class NormalizerService extends AbstractService
         }
 
         return $classProperties;
-
     }
 
     /**
@@ -72,6 +71,7 @@ class NormalizerService extends AbstractService
      * @param string $labelProperty
      *
      * @return array
+     *
      * @throws \Doctrine\Common\Annotations\AnnotationException
      * @throws \ReflectionException
      */
@@ -79,24 +79,24 @@ class NormalizerService extends AbstractService
     {
         $property = [];
 
-        $reflectionProperty  = new \ReflectionProperty($entityName, $labelProperty);
-        $annotationReader    = new AnnotationReader();
+        $reflectionProperty = new \ReflectionProperty($entityName, $labelProperty);
+        $annotationReader = new AnnotationReader();
         $propertyAnnotations = $annotationReader->getPropertyAnnotations($reflectionProperty);
 
         foreach ($propertyAnnotations as $propertyAnnotation) {
             if ($propertyAnnotation instanceof Column) {
                 $property['column_type'] = 'column';
-                $property['type']        = $propertyAnnotation->type;
+                $property['type'] = $propertyAnnotation->type;
             }
             if ($propertyAnnotation instanceof ManyToMany) {
-                $property['column_type']   = 'collection';
+                $property['column_type'] = 'collection';
                 $property['target_entity'] = $propertyAnnotation->targetEntity;
-                $property['type']          = 'collection';
+                $property['type'] = 'collection';
             }
             if ($propertyAnnotation instanceof ManyToOne) {
-                $property['column_type']   = 'entity';
+                $property['column_type'] = 'entity';
                 $property['target_entity'] = $propertyAnnotation->targetEntity;
-                $property['type']          = 'entity';
+                $property['type'] = 'entity';
             }
             //TODO add ManyToMany OneToMany etc...
         }

@@ -46,12 +46,12 @@ class UserControllerTest extends AbstractTestCase
         $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
-        $this->client->request('POST', $path, [],[], [], json_encode($content));
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         // TEST Reponse 409 empty content
         $path = $this->router->generate('_happy_post_user');
-        $this->client->request('POST', $path, [],[], [], null);
+        $this->client->request('POST', $path, [], [], [], null);
         $this->assertEquals(JsonResponse::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 
@@ -68,7 +68,7 @@ class UserControllerTest extends AbstractTestCase
         $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
-        $this->client->request('POST', $path, [],[], [], json_encode($content));
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         // TEST Reponse 404 Not found
@@ -86,7 +86,7 @@ class UserControllerTest extends AbstractTestCase
         $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
-        $this->client->request('POST', $path, [],[], [], json_encode($content));
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $content = ['user' => ['roles' => ['ROLE_USER', 'ROLE_ADMIN']]];
@@ -99,9 +99,9 @@ class UserControllerTest extends AbstractTestCase
 
         // TEST Response 201 Accepted
         $path = $this->router->generate('_happy_edit_user', ['id' => $this->uuid]);
-        $this->client->request('PATCH', $path, [],[], [], json_encode($content));
+        $this->client->request('PATCH', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->client->request('PUT', $path, [],[], [], json_encode($content));
+        $this->client->request('PUT', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
 
@@ -110,7 +110,7 @@ class UserControllerTest extends AbstractTestCase
         $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
-        $this->client->request('POST', $path, [],[], [], json_encode($content));
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         // TEST Reponse 404 Not found

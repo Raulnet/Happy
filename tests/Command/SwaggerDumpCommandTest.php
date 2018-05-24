@@ -50,6 +50,6 @@ class SwaggerDumpCommandTest extends WebTestCase
         ));
 
         $output = $commandTester->getDisplay();
-        $this->assertContains(self::CONTAINT,$output);
+        $this->assertContains(self::CONTAINT, $output);
     }
 }
