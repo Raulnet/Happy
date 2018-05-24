@@ -45,6 +45,11 @@ class BodyConverter implements ParamConverterInterface
         $name = $configuration->getName();
         $object = null;
 
+        if (in_array($request->getMethod(), ['GET', 'DELETE', 'PATCH', 'PUT'])) {
+            $id = $request->get('id');
+            $object = $this->entityConverterService->findEntity($configuration->getClass(), $id);
+        }
+
         if ('POST' === $request->getMethod()) {
             if (empty($request->getContent())) {
                 throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.data.content.empty');

@@ -11,6 +11,7 @@ namespace Happy\Controller;
 use Happy\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Swagger\Annotations as SWG;
@@ -81,6 +82,9 @@ class UserController extends AbstractApiController
     public function postUser(User $user): JsonResponse
     {
         $manager = $this->getDoctrine()->getManager();
+        if($manager->getRepository(User::class)->find($user->getId())) {
+            throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.user.already.created');
+        }
         $manager->persist($user);
         $manager->flush();
 

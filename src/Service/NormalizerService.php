@@ -32,14 +32,13 @@ class NormalizerService extends AbstractService
     public function getHydrator(string $className): EntityHydrator
     {
         $cache = new FilesystemCache();
-        $nameExploded = explode('\\', strtolower($className));
-        $name = end($nameExploded);
+        $name = str_replace('\\', '.', strtolower($className));
         if (!$cache->has('entity.map.properties.'.$name)) {
             $entityMapProperty = $this->getReflexionProperties($className);
             $cache->set('entity.map.properties.'.$name, $entityMapProperty);
         }
 
-        return new EntityHydrator($name, $className, $cache->get('entity.map.properties.'.$name));
+        return new EntityHydrator($className, $cache->get('entity.map.properties.'.$name));
     }
 
     /**

@@ -22,8 +22,6 @@ class EntityHydrator
      */
     private $className;
 
-    private $name;
-
     /**
      * @var array
      */
@@ -35,9 +33,8 @@ class EntityHydrator
      * @param $className
      * @param $entityMapProperties
      */
-    public function __construct(string $name, string $className, array $entityMapProperties)
+    public function __construct(string $className, array $entityMapProperties)
     {
-        $this->name = $name;
         $this->className = $className;
         $this->entityMapProperties = $entityMapProperties;
     }
@@ -56,7 +53,7 @@ class EntityHydrator
         if (empty($content)) {
             throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.no.body.content.submit');
         }
-        $propertiesValues = json_decode($content, true)[$this->name];
+        $propertiesValues = json_decode($content, true);
         foreach ($propertiesValues as $property => $value) {
             $property = $this->getLabelProperty($property);
 
@@ -66,17 +63,11 @@ class EntityHydrator
             if (method_exists($entity, $method)) {
                 switch ($reflexionProperty['type']) {
                     case 'string':
-                        $entity->$method($value);
-                        break;
                     case 'array':
-                        $entity->$method($value);
-                        break;
                     case 'integer':
-                        $entity->$method($value);
-                        break;
                     case 'int':
                         $entity->$method($value);
-                        // no break
+                        break;
                     case 'datetime':
                         $datetime = new \DateTime($value);
                         $entity->$method($datetime);

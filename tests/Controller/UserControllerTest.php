@@ -43,7 +43,7 @@ class UserControllerTest extends AbstractTestCase
 
     public function testPostUser()
     {
-        $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
         $this->client->request('POST', $path, [], [], [], json_encode($content));
@@ -65,7 +65,7 @@ class UserControllerTest extends AbstractTestCase
 
     public function testGetUserById()
     {
-        $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
         $this->client->request('POST', $path, [], [], [], json_encode($content));
@@ -83,13 +83,13 @@ class UserControllerTest extends AbstractTestCase
 
     public function testEditUser()
     {
-        $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
         $this->client->request('POST', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
-        $content = ['user' => ['roles' => ['ROLE_USER', 'ROLE_ADMIN']]];
+        $content = ['roles' => ['ROLE_USER', 'ROLE_ADMIN']];
         // TEST Reponse 404 Not found
         $path = $this->router->generate('_happy_edit_user', ['id' => 'bad_id']);
         $this->client->request('PATCH', $path);
@@ -107,7 +107,7 @@ class UserControllerTest extends AbstractTestCase
 
     public function testRemoveUser()
     {
-        $content = ['user' => ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']]];
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
         $this->client->request('POST', $path, [], [], [], json_encode($content));
