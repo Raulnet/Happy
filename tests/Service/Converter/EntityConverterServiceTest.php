@@ -34,4 +34,18 @@ class EntityConverterServiceTest extends AbstractTestCase
         $this->expectException(HttpException::class);
         $entityConverterService->findEntity(User::class, 'id');
     }
+
+    public function testReturnFindEntity()
+    {
+        $serializer = $this->getMockBuilder(SerializerService::class)->disableOriginalConstructor()->getMock();
+        $normalizer = $this->getMockBuilder(NormalizerService::class)->disableOriginalConstructor()->getMock();
+        $repository = $this->getMockBuilder(UserRepository::class)->disableOriginalConstructor()->getMock();
+        $user = new User();
+        $repository->expects($this->once())->method('find')->willReturn($user);
+        $manager = $this->getMockBuilder(EntityManagerInterface::class)->disableOriginalConstructor()->getMock();
+        $manager->expects($this->once())->method('getRepository')->willReturn($repository);
+
+        $entityConverterService = new EntityConverterService($manager, $serializer, $normalizer);
+        $this->assertTrue($entityConverterService->findEntity(User::class, 'id') instanceof User);
+    }
 }

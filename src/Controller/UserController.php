@@ -102,7 +102,7 @@ class UserController extends AbstractApiController
      *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
-     * @ParamConverter("user", converter="body.converter", class="Happy\Entity\User")
+     * @ParamConverter("user", class="Happy\Entity\User")
      * @SWG\Response(
      *     response=200,
      *     description="Edit User by methods PATCH/PUT"

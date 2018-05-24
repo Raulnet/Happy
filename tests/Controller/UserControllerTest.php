@@ -87,7 +87,7 @@ class UserControllerTest extends AbstractTestCase
 
     public function testEditUser()
     {
-        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB'], 'projects' => []];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_user');
         $this->client->request('POST', $path, [], [], [], json_encode($content));
