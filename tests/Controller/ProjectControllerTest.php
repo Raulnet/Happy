@@ -45,7 +45,7 @@ class ProjectControllerTest extends WebTestCase
 
     public function testPostProject()
     {
-        $project = ['id' =>$this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
+        $project = ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path, [], [], [], json_encode($project));
@@ -54,7 +54,7 @@ class ProjectControllerTest extends WebTestCase
 
     public function testGetProject()
     {
-        $project = ['id' =>$this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
+        $project = ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path, [], [], [], json_encode($project));
@@ -72,7 +72,7 @@ class ProjectControllerTest extends WebTestCase
 
     public function testEditProject()
     {
-        $project = ['id' =>$this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
+        $project = ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
         // TEST Reponse 201 Created
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path, [], [], [], json_encode($project));

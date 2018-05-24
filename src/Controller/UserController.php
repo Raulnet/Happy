@@ -82,7 +82,7 @@ class UserController extends AbstractApiController
     public function postUser(User $user): JsonResponse
     {
         $manager = $this->getDoctrine()->getManager();
-        if($manager->getRepository(User::class)->find($user->getId())) {
+        if ($manager->getRepository(User::class)->find($user->getId())) {
             throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.user.already.created');
         }
         $manager->persist($user);

@@ -8,7 +8,6 @@
 
 namespace Happy\Tests\Controller;
 
-use Happy\Entity\User;
 use Happy\Tests\AbstractTestCase;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -52,6 +51,11 @@ class UserControllerTest extends AbstractTestCase
         // TEST Reponse 409 empty content
         $path = $this->router->generate('_happy_post_user');
         $this->client->request('POST', $path, [], [], [], null);
+        $this->assertEquals(JsonResponse::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
+
+        // TEST Exception
+        $path = $this->router->generate('_happy_post_user');
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
         $this->assertEquals(JsonResponse::HTTP_CONFLICT, $this->client->getResponse()->getStatusCode());
     }
 

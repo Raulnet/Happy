@@ -106,7 +106,7 @@ class DocumentationController extends AbstractApiController
         $manager->persist($documentation);
         $manager->flush();
 
-        return new JsonResponse(null, JsonResponse::HTTP_CREATED);
+        return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -144,20 +144,24 @@ class DocumentationController extends AbstractApiController
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
 
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+        return $this->apiJsonResponse($documentation, JsonResponse::HTTP_OK);
     }
 
     /**
-     * @param string $id
+     * @param Project       $project
+     * @param Documentation $documentation
      *
-     * @Route("/project/{projectId}/documentation/{id}",
+     * @Route("/projects/{projectId}/documentations/{documentationId}",
      *     name="_happy_remove_documentation",
      *     methods={"DELETE"},
      *     requirements={
      *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
-     *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          "documentationId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
      *          }
      *     )
+     * @ParamConverter("project", class="Happy\Entity\Project", options={"id"="projectId"})
+     * @ParamConverter("documentation", class="Happy\Entity\Documentation", options={"id"="documentationId"})
+     *
      * @SWG\Response(
      *     response=200,
      *     description="Remove (soft delete) User by method DELETE"
@@ -166,9 +170,14 @@ class DocumentationController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function removeDocumentation($id)
+    public function removeDocumentation(Project $project, Documentation $documentation)
     {
-        return new JsonResponse(null, JsonResponse::HTTP_OK);
+        $this->support($project, $documentation);
+        $documentation->setDateDeleted(new \DateTime('now'));
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        return $this->apiJsonResponse($documentation, JsonResponse::HTTP_OK);
     }
 
     private function support(Project $project, Documentation $documentation)
