@@ -8,6 +8,7 @@
 
 namespace Happy\Controller;
 
+use Happy\Entity\Project;
 use Happy\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -146,6 +147,70 @@ class UserController extends AbstractApiController
     public function removeUser(User $user): JsonResponse
     {
         $user->setDateDeleted(new \DateTime('now'));
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        return new JsonResponse(null, JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @param User    $user
+     * @param Project $project
+     *
+     * @Route("/users/{userId}/projects/{projectId}",
+     *     name="_happy_user_add_project",
+     *     methods={"PATCH", "PUT"},
+     *     requirements={
+     *          "userId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
+     *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          }
+     *     )
+     * @ParamConverter("user", class="Happy\Entity\User", options={"id"="userId"})
+     * @ParamConverter("project", class="Happy\Entity\Project", options={"id"="projectId"})
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Add Project to User"
+     * )
+     * @SWG\Tag(name="user")
+     *
+     * @return JsonResponse
+     */
+    public function addProject(User $user, Project $project)
+    {
+        $user->addProject($project);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->flush();
+
+        return new JsonResponse(null, JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @param User    $user
+     * @param Project $project
+     *
+     * @Route("/users/{userId}/projects/{projectId}",
+     *     name="_happy_user_remove_project",
+     *     methods={"DELETE"},
+     *     requirements={
+     *          "userId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$",
+     *          "projectId"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          }
+     *     )
+     * @ParamConverter("user", class="Happy\Entity\User", options={"id"="userId"})
+     * @ParamConverter("project", class="Happy\Entity\Project", options={"id"="projectId"})
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Remove Project of User"
+     * )
+     * @SWG\Tag(name="user")
+     *
+     * @return JsonResponse
+     */
+    public function removeProject(User $user, Project $project)
+    {
+        $user->removeProject($project);
         $manager = $this->getDoctrine()->getManager();
         $manager->flush();
 

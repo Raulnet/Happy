@@ -126,4 +126,48 @@ class UserControllerTest extends AbstractTestCase
         $this->client->request('DELETE', $path);
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
     }
+
+    public function testAddProject()
+    {
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
+        // TEST Reponse 201 Created
+        $path = $this->router->generate('_happy_post_user');
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
+        $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $project = ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
+        // TEST Reponse 201 Created
+        $path = $this->router->generate('_happy_post_project');
+        $this->client->request('POST', $path, [], [], [], json_encode($project));
+        $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $path = $this->router->generate('_happy_user_add_project', ['userId' => $this->uuid, 'projectId' => $this->uuid]);
+        $this->client->request('PATCH', $path, [], [], []);
+        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->client->request('PUT', $path, [], [], []);
+        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testRemoveProject()
+    {
+        $content = ['id' => $this->uuid, 'roles' => ['ROLE_USER', 'ROLE_BOB']];
+        // TEST Reponse 201 Created
+        $path = $this->router->generate('_happy_post_user');
+        $this->client->request('POST', $path, [], [], [], json_encode($content));
+        $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $project = ['id' => $this->uuid, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
+        // TEST Reponse 201 Created
+        $path = $this->router->generate('_happy_post_project');
+        $this->client->request('POST', $path, [], [], [], json_encode($project));
+        $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
+
+        $path = $this->router->generate('_happy_user_remove_project', ['userId' => $this->uuid, 'projectId' => $this->uuid]);
+        $this->client->request('DELETE', $path, [], [], []);
+        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+
+        $path = $this->router->generate('_happy_user_remove_project', ['userId' => 'WRONG_ID', 'projectId' => $this->uuid]);
+        $this->client->request('DELETE', $path, [], [], []);
+        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+    }
 }
