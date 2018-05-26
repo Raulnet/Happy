@@ -1,1 +1,2 @@
-![Happy](https://www.syfystore.com/media/catalog/product/cache/5/cp_image_section/500x/9df78eab33525d08d6e5fb8d27136e95/h/a/happy_logo_white_mug_rollover.jpg "Happy!")
+Happy!
+=====

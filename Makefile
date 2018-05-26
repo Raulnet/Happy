@@ -2,10 +2,18 @@ docker-start:
 	docker-compose up -d
 	make composer-install
 
+docker-build:
+	docker-compose build
+	make docker-start
+	sleep 10
+	make cache-clear
+	docker-compose -f docker-compose.yml run --rm api  ./vendor/bin/phinx m --no-interaction
+	chown -R www-data ./var/cache
+
 docker-stop:
 	docker-compose stop
 
-# MALCOLM BASH
+# DOCKER BASH
 docker-bash:
 	docker exec -it happy_api_1 bash
 
@@ -28,12 +36,8 @@ phpunit-coverage:
 
 rebuild:
 	docker-compose down
-	docker-compose build
-	make docker-start
-	sleep 10
-	make cache-clear
-	docker-compose -f docker-compose.yml run --rm api  ./vendor/bin/phinx m --no-interaction
-	chown -R www-data ./var/cache
+	make docker-build
+
 
 php-fixer:
 	php-cs-fixer fix ./src -vvv --rules=@Symfony
