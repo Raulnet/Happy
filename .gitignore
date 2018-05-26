@@ -4,6 +4,7 @@
 /public/bundles/
 /var/
 /vendor/
+/.coveralls.yml
 /src/Migrations/*
 ###< symfony/framework-bundle ###
 
