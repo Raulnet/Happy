@@ -10,6 +10,7 @@ namespace Happy\Controller;
 
 use Happy\Entity\Documentation;
 use Happy\Entity\Project;
+use Happy\Service\DocumentationService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,21 @@ use Swagger\Annotations as SWG;
  */
 class DocumentationController extends AbstractApiController
 {
+    /**
+     * @var DocumentationService
+     */
+    private $documentationService;
+
+    /**
+     * DocumentationController constructor.
+     *
+     * @param DocumentationService $documentationService
+     */
+    public function __construct(DocumentationService $documentationService)
+    {
+        $this->documentationService = $documentationService;
+    }
+
     /**
      * @param Project $project
      *
@@ -105,6 +121,33 @@ class DocumentationController extends AbstractApiController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($documentation);
         $manager->flush();
+
+        return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * @param Request $request
+     * @param Project $project
+     *
+     * @Route("/projects/{id}/documentations/raw",
+     *     name="_happy_post_documentation_raw",
+     *     methods={"POST"},
+     *     requirements={
+     *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+     *          }
+     *     )
+     * )
+     * @SWG\Response(
+     *     response=201,
+     *     description="create documentation by method Post"
+     * )
+     * @SWG\Tag(name="documentation")
+     *
+     * @return JsonResponse
+     */
+    public function postRawDocumentation(Request $request, Project $project)
+    {
+        $this->documentationService->pushDocumentationRaw($project, $request->getContent());
 
         return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
     }

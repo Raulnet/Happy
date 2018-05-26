@@ -25,7 +25,7 @@ use Swagger\Annotations as SWG;
 class HomeController extends Controller
 {
     /**
-     * @Route("/", name="happy_home", methods={"GET"})
+     * @Route("/", name="_happy_home", methods={"GET"})
      * @SWG\Response(
      *     response=200,
      *     description="Returns list of api available"
