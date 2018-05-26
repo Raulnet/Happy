@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527277579">
-  <project timestamp="1527277579">
+<coverage generated="1527323280">
+  <project timestamp="1527323280">
     <package name="Happy\Command">
       <file name="/var/www/html/src/Command/SwaggerDumpCommand.php">
         <class name="Happy\Command\SwaggerDumpCommand" namespace="Happy\Command">
