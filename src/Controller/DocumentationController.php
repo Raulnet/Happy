@@ -95,8 +95,8 @@ class DocumentationController extends AbstractApiController
     }
 
     /**
+     * @param Request $request
      * @param Project       $project
-     * @param Documentation $documentation
      *
      * @Route("/projects/{id}/documentations",
      *     name="_happy_post_documentation",
@@ -106,7 +106,6 @@ class DocumentationController extends AbstractApiController
      *          }
      *     )
      * )
-     * @ParamConverter("documentation", converter="body.converter", class="Happy\Entity\Documentation")
      * @SWG\Response(
      *     response=201,
      *     description="create documentation by method Post"
@@ -115,37 +114,7 @@ class DocumentationController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function postDocumentation(Project $project, Documentation $documentation)
-    {
-        $documentation->setProject($project);
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($documentation);
-        $manager->flush();
-
-        return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
-    }
-
-    /**
-     * @param Request $request
-     * @param Project $project
-     *
-     * @Route("/projects/{id}/documentations/raw",
-     *     name="_happy_post_documentation_raw",
-     *     methods={"POST"},
-     *     requirements={
-     *          "id"="^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
-     *          }
-     *     )
-     * )
-     * @SWG\Response(
-     *     response=201,
-     *     description="create documentation by method Post"
-     * )
-     * @SWG\Tag(name="documentation")
-     *
-     * @return JsonResponse
-     */
-    public function postRawDocumentation(Request $request, Project $project)
+    public function postDocumentation(Request $request, Project $project)
     {
         $this->documentationService->pushDocumentationRaw($project, $request->getContent());
 

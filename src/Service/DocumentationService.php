@@ -39,23 +39,38 @@ class DocumentationService extends AbstractService
      * @param Project $project
      * @param string  $documentationRaw
      */
-    public function pushDocumentationRaw(Project $project, string $documentationRaw)
+    public function pushDocumentationRaw(Project $project, string $docSwagger): void
     {
-        $data = json_decode($documentationRaw, true);
+        $data = json_decode($docSwagger, true);
         $version = $data['info']['version'];
         if(empty($version)) {
             throw new HttpException('http.exception.format.documentation.wrong');
         }
-        $version.=time();
+        $version.='.'.time();
         $lastDocumentation = $this->manager->getRepository(Documentation::class)
-                                           ->findBy(['project' => $project], ['dateCreation' => 'DESC'], 1, 0);
+                                           ->findOneBy(['project' => $project], ['dateCreation' => 'DESC']);
         if(empty($lastDocumentation)) {
+            $this->createDocumentation($project, $docSwagger, $version);
 
-            $uuid = Uuid::uuid4();
-            $fileName = '/tmp/'.$uuid->toString().'.json';
-//            $this->putFile($fileName, $documentationRaw);
-            $this->putDocumentation($uuid->toString(), $project, $version, $fileName);
+        } else {
+            $documentationPath = $lastDocumentation->getPath();
+            $docStream = file_get_contents($documentationPath);
+            if($docStream !== $docSwagger) {
+                $this->createDocumentation($project, $docSwagger, $version);
+            }
         }
+    }
+
+    /**
+     * @param Project $project
+     * @param string  $swaggerDoc
+     * @param string  $version
+     */
+    private function createDocumentation(Project $project, string $swaggerDoc, string $version): void {
+        $uuid = Uuid::uuid4();
+        $fileName = '/tmp/'.$uuid->toString().'.json';
+        $this->putFile($fileName, $swaggerDoc);
+        $this->putDocumentation($uuid->toString(), $project, $version, $fileName);
     }
 
     /**
@@ -76,7 +91,7 @@ class DocumentationService extends AbstractService
     private function putDocumentation(string $uuid, Project $project, string $version, string $fileName): void
     {
         $documentation = new Documentation();
-        $documentation->setId($uuid->toString());
+        $documentation->setId($uuid);
         $documentation->setProject($project);
         $documentation->setPath($fileName);
         $documentation->setVersion($version);

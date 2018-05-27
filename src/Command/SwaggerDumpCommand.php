@@ -20,6 +20,7 @@ use GuzzleHttp\Client;
 class SwaggerDumpCommand extends Command
 {
     const COMMAND_NAME = 'happy:swagger:dump';
+    const PROJECT_ID = '267743cd-1216-4646-aeb9-4bdfc60ac6c6';
 
     /** @var SwaggerDumpService */
     private $dumpService;
@@ -31,7 +32,6 @@ class SwaggerDumpCommand extends Command
      * SwaggerDumpCommand constructor.
      *
      * @param SwaggerDumpService $dumpService
-     * @param Client             $client
      */
     public function __construct(SwaggerDumpService $dumpService)
     {
@@ -49,11 +49,12 @@ class SwaggerDumpCommand extends Command
     {
         $json = $this->dumpService->getSwaggerDoc();
 
-//        $r = $this->client->request('POST', 'http://localhost:80/api/projects/01442b9f-bd75-409e-8535-f34346b4cebf/documentations/raw', [
-//            'body' => $json
-//        ]);
+        $r = $this->client->request('POST', 'http://localhost:80/api/projects/'.self::PROJECT_ID.'/documentations', [
+            'body' => $json
+        ]);
 
-        $output->write('<info>'.$json.'</info>');
+        $output->write('<info>'.$r->getStatusCode().'</info>');
+        $output->write('<info>'.$r->getBody()->getContents().'</info>');
         $output->write(PHP_EOL);
 
         return 0;

@@ -45,10 +45,12 @@ abstract class AbstractApiController extends AbstractController
      */
     public function apiJsonResponse($content, int $code = JsonResponse::HTTP_OK): JsonResponse
     {
-        $data = $this->serializer->serialize($content, self::FORMAT_JSON);
+        if(!empty($content)) {
+            $content =  $this->serializer->serialize($content, self::FORMAT_JSON);
+        }
         $response = new JsonResponse();
         $response->setStatusCode($code);
-        $response->setContent($data);
+        $response->setContent($content);
 
         return $response;
     }
