@@ -5,7 +5,7 @@ services:
         class: Happy\Service\Converter\EntityConverterService
         arguments:
             - "@doctrine.orm.default_entity_manager"
-            - "@serializer.service"
+            - "@Happy\\Service\\SerializerService"
             - "@normalizer.service"
     body.converter:
         class:        Happy\Service\Converter\BodyConverter

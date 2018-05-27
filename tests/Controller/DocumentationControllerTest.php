@@ -55,8 +55,7 @@ class DocumentationControllerTest extends AbstractTestCase
     public function testPostDocumentation()
     {
 
-        $uuid      = Uuid::uuid4();
-        $projectId = $uuid->toString();
+        $projectId = $this->projectId;
 
         $project = ['id' => $projectId, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
         // TEST Reponse 201 Created
@@ -88,17 +87,19 @@ class DocumentationControllerTest extends AbstractTestCase
         $path = $this->router->generate('_happy_get_documentations', ['id' => 'bad_project_id']);
         $this->client->request('GET', $path);
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
-        // TEST Reponse 200 Ok
-        foreach ($this->postProjects as $project) {
-            $path = $this->router->generate('_happy_get_documentations', ['id' => $project['id']]);
-            $this->client->request('GET', $path);
-            $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
-            $this->postDocumentation += json_decode($this->client->getResponse()->getContent(), true);
-        }
+
+
+        $this->testPostDocumentation();
+
+        $path = $this->router->generate('_happy_get_documentations', ['id' => $this->projectId]);
+        $this->client->request('GET', $path);
+        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->postDocumentations = json_decode($this->client->getResponse()->getContent(), true);
     }
 
     public function testGetDocumentation()
     {
+        $this->testGetDocumentations();
 
         // TEST Reponse 404 Not found
         $path = $this->router->generate('_happy_get_documentation',
@@ -108,50 +109,55 @@ class DocumentationControllerTest extends AbstractTestCase
         // TEST Reponse 200 Ok
         foreach ($this->postDocumentations as $documentation) {
             $path = $this->router->generate('_happy_get_documentation',
-                ['projectId' => $documentation['project_id'], 'documentationId' => $documentation['id']]);
+                ['projectId' => $documentation['project']['id'], 'documentationId' => $documentation['id']]);
             $this->client->request('GET', $path);
             $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
         }
-
     }
 
-//    public function testEditDocumentation()
-//    {
-//
-//        // TEST Reponse 404 Not found
-//        $path = $this->router->generate('_happy_edit_documentation',
-//            ['projectId' => 'bad_project_id', 'documentationId' => 'bad_id']);
-//        $this->client->request('PATCH', $path);
-//        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
-//        $this->client->request('PUT', $path);
-//        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+    public function testEditDocumentation()
+    {
 
-//        $swaggerDoc = ['id' => $this->documentationId, 'version' => '0.0.0', 'path' => '/tmp'];
-//        // TEST Response 201 Accepted
-//        $path = $this->router->generate('_happy_edit_documentation',
-//            ['projectId' => $documentation['project_id'], 'documentationId' => $documentation['id']]);
-//        $this->client->request('PATCH', $path, [], [], [], json_encode($documentation));
-//        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
-//        $this->client->request('PUT', $path, [], [], [], json_encode($documentation));
-//        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
-//    }
-//
-//    public function testRemoveDocumentation()
-//    {
-//
-//        // TEST Reponse 404 Not found
-//        $path = $this->router->generate('_happy_remove_documentation',
-//            ['projectId' => 'bad_project_id', 'documentationId' => 'bad_id']);
-//        $this->client->request('DELETE', $path);
-//        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
-//        // TEST Response 201 Accepted
-//
-//        $path = $this->router->generate('_happy_remove_documentation',
-//            ['projectId' => $this->projectId, 'documentationId' => $this->documentationId]);
-//        $this->client->request('DELETE', $path);
-//        $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
-//
-//    }
+        // TEST Reponse 404 Not found
+        $path = $this->router->generate('_happy_edit_documentation',
+            ['projectId' => 'bad_project_id', 'documentationId' => 'bad_id']);
+        $this->client->request('PATCH', $path);
+        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->client->request('PUT', $path);
+        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+
+
+        $this->testGetDocumentations();
+        // TEST Response 200 Accepted
+        foreach ($this->postDocumentations as $index => $documentation) {
+            $swaggerDoc = ['version' => '0.0.2.'.$index];
+            $path = $this->router->generate('_happy_edit_documentation',
+                ['projectId' => $documentation['project']['id'], 'documentationId' => $documentation['id']]);
+            $this->client->request('PATCH', $path, [], [], [], json_encode($swaggerDoc));
+            $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+            $this->client->request('PUT', $path, [], [], [], json_encode($swaggerDoc));
+            $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        }
+    }
+
+    public function testRemoveDocumentation()
+    {
+
+        // TEST Reponse 404 Not found
+        $path = $this->router->generate('_happy_remove_documentation',
+            ['projectId' => 'bad_project_id', 'documentationId' => 'bad_id']);
+        $this->client->request('DELETE', $path);
+        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+
+        $this->testGetDocumentations();
+        // TEST Response 200 Accepted
+        foreach ($this->postDocumentations as $documentation) {
+            $path = $this->router->generate('_happy_remove_documentation',
+                ['projectId' => $documentation['project']['id'], 'documentationId' => $documentation['id']]);
+            $this->client->request('DELETE', $path);
+            $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        }
+    }
 
     public function testSupport()
     {

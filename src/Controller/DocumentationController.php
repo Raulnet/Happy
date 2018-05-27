@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
+use Happy\Service\NormalizerService;
+use Happy\Service\SerializerService;
 
 /**
  * Class DocumentationController.
@@ -33,10 +35,16 @@ class DocumentationController extends AbstractApiController
     /**
      * DocumentationController constructor.
      *
+     * @param SerializerService    $serializerService
+     * @param NormalizerService    $normalizerService
      * @param DocumentationService $documentationService
      */
-    public function __construct(DocumentationService $documentationService)
-    {
+    public function __construct(
+        SerializerService $serializerService,
+        NormalizerService $normalizerService,
+        DocumentationService $documentationService
+    ) {
+        parent::__construct($serializerService, $normalizerService);
         $this->documentationService = $documentationService;
     }
 
@@ -60,8 +68,7 @@ class DocumentationController extends AbstractApiController
      */
     public function getDocumentations(Project $project)
     {
-        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);
-
+        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);;
         return $this->apiJsonResponse($documentations, JsonResponse::HTTP_OK);
     }
 
@@ -96,7 +103,7 @@ class DocumentationController extends AbstractApiController
 
     /**
      * @param Request $request
-     * @param Project       $project
+     * @param Project $project
      *
      * @Route("/projects/{id}/documentations",
      *     name="_happy_post_documentation",

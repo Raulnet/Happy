@@ -31,9 +31,6 @@ services:
         class: Happy\Service\SwaggerDumpService
         arguments: ["@nelmio_api_doc.generator"]
 
-    serializer.service:
-        class: Happy\Service\SerializerService
-
     Happy\Service\EventListener\ExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }
