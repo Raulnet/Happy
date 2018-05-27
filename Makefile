@@ -28,7 +28,8 @@ cache-clear:
 # PHPUNIT
 phpunit:
 	docker-compose -f docker-compose.yml run --rm api ./bin/console cache:clear --no-warmup --env=test
-	docker-compose -f docker-compose.yml run --rm api ./vendor/bin/simple-phpunit --coverage-clover build/logs/clover.xml
+	docker-compose -f docker-compose.yml run --rm api ./vendor/bin/simple-phpunit
+	docker-compose -f docker-compose.yml run --rm api ./vendor/bin/php-coveralls -v
 
 phpunit-coverage:
 	docker-compose -f docker-compose.yml run --rm api ./bin/console cache:clear --no-warmup --env=test

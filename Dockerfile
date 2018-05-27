@@ -64,11 +64,17 @@ RUN php -r "readfile('https://getcomposer.org/installer');" | php \
 # Add code
 ADD . /var/www/html
 
+# Enable mod rewrite
+RUN wget https://phar.phpunit.de/phpunit-6.5.phar
+RUN chmod +x phpunit-6.5.phar
+RUN mv phpunit-6.5.phar /usr/local/bin/phpunit
+RUN phpunit --version
+
 # Xdebug - uncomment and rebuild image if you want it !
-RUN yes | pecl install xdebug \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+#RUN yes | pecl install xdebug \
+#    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+#    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+#    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # Dump autolad
 RUN composer install --optimize-autoloader
