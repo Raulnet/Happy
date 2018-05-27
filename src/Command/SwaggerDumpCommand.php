@@ -32,12 +32,13 @@ class SwaggerDumpCommand extends Command
      * SwaggerDumpCommand constructor.
      *
      * @param SwaggerDumpService $dumpService
+     * @param Client             $client
      */
-    public function __construct(SwaggerDumpService $dumpService)
+    public function __construct(SwaggerDumpService $dumpService, Client $client)
     {
         parent::__construct();
         $this->dumpService = $dumpService;
-        $this->client      = new Client();
+        $this->client      = $client;
     }
 
     protected function configure()
