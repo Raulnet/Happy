@@ -80,7 +80,7 @@ class DocumentationControllerTest extends AbstractTestCase
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
 
         $documentation = ['info' => ['version' => '0.0.2']];
-        // TEST Reponse 201 Created
+        // TEST Reponse 201 Created/update
         $path = $this->router->generate('_happy_post_documentation', ['id' => $projectId]);
         $this->client->request('POST', $path, [], [], [], json_encode($documentation));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
