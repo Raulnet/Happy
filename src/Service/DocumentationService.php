@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Happy\Entity\Documentation;
 use Happy\Entity\Project;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -44,7 +45,7 @@ class DocumentationService extends AbstractService
         $data = json_decode($docSwagger, true);
         $version = $data['info']['version'];
         if(empty($version)) {
-            throw new HttpException('http.exception.format.documentation.wrong');
+            throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.format.documentation.wrong');
         }
         $version.='.'.time();
         $lastDocumentation = $this->manager->getRepository(Documentation::class)

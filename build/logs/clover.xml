@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527462769">
-  <project timestamp="1527462769">
+<coverage generated="1527466577">
+  <project timestamp="1527466577">
     <package name="Happy\Command">
       <file name="/var/www/html/src/Command/SwaggerDumpCommand.php">
         <class name="Happy\Command\SwaggerDumpCommand" namespace="Happy\Command">
@@ -177,8 +177,8 @@
         <line num="93" type="method" name="setVersion" visibility="public" complexity="1" crap="1" count="6"/>
         <line num="95" type="stmt" count="6"/>
         <line num="96" type="stmt" count="6"/>
-        <line num="101" type="method" name="getPath" visibility="public" complexity="1" crap="1" count="1"/>
-        <line num="103" type="stmt" count="1"/>
+        <line num="101" type="method" name="getPath" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="103" type="stmt" count="6"/>
         <line num="109" type="method" name="setPath" visibility="public" complexity="1" crap="1" count="6"/>
         <line num="111" type="stmt" count="6"/>
         <line num="112" type="stmt" count="6"/>
@@ -368,37 +368,36 @@
       </file>
       <file name="/var/www/html/src/Service/DocumentationService.php">
         <class name="Happy\Service\DocumentationService" namespace="Happy\Service" fullPackage="Happy" package="Happy">
-          <metrics complexity="8" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="26" elements="36" coveredelements="30"/>
+          <metrics complexity="8" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="36" coveredelements="36"/>
         </class>
-        <line num="33" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="5"/>
-        <line num="35" type="stmt" count="5"/>
-        <line num="36" type="stmt" count="5"/>
-        <line num="42" type="method" name="pushDocumentationRaw" visibility="public" complexity="4" crap="4.73" count="5"/>
-        <line num="44" type="stmt" count="5"/>
-        <line num="45" type="stmt" count="5"/>
-        <line num="46" type="stmt" count="5"/>
-        <line num="47" type="stmt" count="0"/>
-        <line num="49" type="stmt" count="5"/>
+        <line num="34" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
+        <line num="36" type="stmt" count="6"/>
+        <line num="37" type="stmt" count="6"/>
+        <line num="43" type="method" name="pushDocumentationRaw" visibility="public" complexity="4" crap="4" count="6"/>
+        <line num="45" type="stmt" count="6"/>
+        <line num="46" type="stmt" count="6"/>
+        <line num="47" type="stmt" count="6"/>
+        <line num="48" type="stmt" count="1"/>
         <line num="50" type="stmt" count="5"/>
         <line num="51" type="stmt" count="5"/>
         <line num="52" type="stmt" count="5"/>
         <line num="53" type="stmt" count="5"/>
-        <line num="56" type="stmt" count="0"/>
-        <line num="57" type="stmt" count="0"/>
-        <line num="58" type="stmt" count="0"/>
-        <line num="59" type="stmt" count="0"/>
-        <line num="62" type="stmt" count="5"/>
-        <line num="69" type="method" name="createDocumentation" visibility="private" complexity="1" crap="1" count="5"/>
-        <line num="70" type="stmt" count="5"/>
+        <line num="54" type="stmt" count="5"/>
+        <line num="57" type="stmt" count="5"/>
+        <line num="58" type="stmt" count="5"/>
+        <line num="59" type="stmt" count="5"/>
+        <line num="60" type="stmt" count="5"/>
+        <line num="63" type="stmt" count="5"/>
+        <line num="70" type="method" name="createDocumentation" visibility="private" complexity="1" crap="1" count="5"/>
         <line num="71" type="stmt" count="5"/>
         <line num="72" type="stmt" count="5"/>
         <line num="73" type="stmt" count="5"/>
         <line num="74" type="stmt" count="5"/>
-        <line num="80" type="method" name="putFile" visibility="private" complexity="1" crap="1" count="5"/>
-        <line num="82" type="stmt" count="5"/>
+        <line num="75" type="stmt" count="5"/>
+        <line num="81" type="method" name="putFile" visibility="private" complexity="1" crap="1" count="5"/>
         <line num="83" type="stmt" count="5"/>
-        <line num="91" type="method" name="putDocumentation" visibility="private" complexity="1" crap="1" count="5"/>
-        <line num="93" type="stmt" count="5"/>
+        <line num="84" type="stmt" count="5"/>
+        <line num="92" type="method" name="putDocumentation" visibility="private" complexity="1" crap="1" count="5"/>
         <line num="94" type="stmt" count="5"/>
         <line num="95" type="stmt" count="5"/>
         <line num="96" type="stmt" count="5"/>
@@ -406,7 +405,8 @@
         <line num="98" type="stmt" count="5"/>
         <line num="99" type="stmt" count="5"/>
         <line num="100" type="stmt" count="5"/>
-        <metrics loc="102" ncloc="66" classes="1" methods="5" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="26" elements="36" coveredelements="30"/>
+        <line num="101" type="stmt" count="5"/>
+        <metrics loc="103" ncloc="67" classes="1" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="31" elements="36" coveredelements="36"/>
       </file>
       <file name="/var/www/html/src/Service/NormalizerService.php">
         <class name="Happy\Service\NormalizerService" namespace="Happy\Service">
@@ -600,6 +600,6 @@
         <metrics loc="101" ncloc="67" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="32" coveredstatements="32" elements="35" coveredelements="35"/>
       </file>
     </package>
-    <metrics files="24" loc="2130" ncloc="1118" classes="24" methods="100" coveredmethods="99" conditionals="0" coveredconditionals="0" statements="335" coveredstatements="330" elements="435" coveredelements="429"/>
+    <metrics files="24" loc="2131" ncloc="1119" classes="24" methods="100" coveredmethods="100" conditionals="0" coveredconditionals="0" statements="335" coveredstatements="335" elements="435" coveredelements="435"/>
   </project>
 </coverage>
