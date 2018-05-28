@@ -68,7 +68,8 @@ class DocumentationController extends AbstractApiController
      */
     public function getDocumentations(Project $project)
     {
-        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);;
+        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);
+
         return $this->apiJsonResponse($documentations, JsonResponse::HTTP_OK);
     }
 

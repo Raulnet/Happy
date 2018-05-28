@@ -38,8 +38,10 @@ class ProjectController extends AbstractApiController
     public function getProjects(): JsonResponse
     {
         $projects = $this->getDoctrine()->getRepository(Project::class)->findAll();
+
         return $this->apiJsonResponse($projects, JsonResponse::HTTP_OK);
     }
+
     /**
      * @param Project $project
      * @Route("/projects/{id}",

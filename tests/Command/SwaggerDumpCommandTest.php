@@ -31,7 +31,6 @@ class SwaggerDumpCommandTest extends WebTestCase
 
     private $mockGuzzleClient;
 
-
     public function setUp(): void
     {
         $this->client = static::createClient();
@@ -40,13 +39,11 @@ class SwaggerDumpCommandTest extends WebTestCase
                                              ->getMock();
         $this->mockSwaggerDumpService->expects($this->once())->method('getSwaggerDoc')->willReturn(self::CONTAINT);
 
-
-
         $this->mockGuzzleClient = $this->getMockBuilder(Client::class)
                                        ->disableOriginalConstructor()
                                        ->getMock();
 
-        $response = new Response(JsonResponse::HTTP_CREATED, [], (string)JsonResponse::HTTP_CREATED);
+        $response = new Response(JsonResponse::HTTP_CREATED, [], (string) JsonResponse::HTTP_CREATED);
         $this->mockGuzzleClient->expects($this->once())->method('request')->willReturn($response);
     }
 
@@ -65,6 +62,6 @@ class SwaggerDumpCommandTest extends WebTestCase
         ));
 
         $output = $commandTester->getDisplay();
-        $this->assertContains((string)JsonResponse::HTTP_CREATED, $output);
+        $this->assertContains((string) JsonResponse::HTTP_CREATED, $output);
     }
 }

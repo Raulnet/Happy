@@ -44,17 +44,16 @@ class DocumentationControllerTest extends AbstractTestCase
      */
     public function setUp()
     {
-        $this->client          = static::createClient();
-        $this->router          = $this->client->getContainer()->get('router');
-        $uuid                  = Uuid::uuid4();
+        $this->client = static::createClient();
+        $this->router = $this->client->getContainer()->get('router');
+        $uuid = Uuid::uuid4();
         $this->documentationId = $uuid->toString();
-        $uuid                  = Uuid::uuid4();
-        $this->projectId       = $uuid->toString();
+        $uuid = Uuid::uuid4();
+        $this->projectId = $uuid->toString();
     }
 
     public function testPostDocumentation()
     {
-
         $projectId = $this->projectId;
 
         $project = ['id' => $projectId, 'name' => 'phpunit project', 'urlDocumentation' => 'http://localhost:3000'];
@@ -84,7 +83,6 @@ class DocumentationControllerTest extends AbstractTestCase
         $path = $this->router->generate('_happy_post_documentation', ['id' => $projectId]);
         $this->client->request('POST', $path, [], [], [], json_encode($documentation));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-
     }
 
     public function testGetDocumentations()
@@ -93,7 +91,6 @@ class DocumentationControllerTest extends AbstractTestCase
         $path = $this->router->generate('_happy_get_documentations', ['id' => 'bad_project_id']);
         $this->client->request('GET', $path);
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
-
 
         $this->testPostDocumentation();
 
@@ -123,7 +120,6 @@ class DocumentationControllerTest extends AbstractTestCase
 
     public function testEditDocumentation()
     {
-
         // TEST Reponse 404 Not found
         $path = $this->router->generate('_happy_edit_documentation',
             ['projectId' => 'bad_project_id', 'documentationId' => 'bad_id']);
@@ -131,7 +127,6 @@ class DocumentationControllerTest extends AbstractTestCase
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
         $this->client->request('PUT', $path);
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
-
 
         $this->testGetDocumentations();
         // TEST Response 200 Accepted
@@ -148,7 +143,6 @@ class DocumentationControllerTest extends AbstractTestCase
 
     public function testRemoveDocumentation()
     {
-
         // TEST Reponse 404 Not found
         $path = $this->router->generate('_happy_remove_documentation',
             ['projectId' => 'bad_project_id', 'documentationId' => 'bad_id']);
@@ -167,9 +161,9 @@ class DocumentationControllerTest extends AbstractTestCase
 
     public function testSupport()
     {
-        $controller    = $this->getMockBuilder(DocumentationController::class)->disableOriginalConstructor()->getMock();
+        $controller = $this->getMockBuilder(DocumentationController::class)->disableOriginalConstructor()->getMock();
         $documentation = new Documentation();
-        $project       = new Project();
+        $project = new Project();
         $project->setId('first');
         $project2 = new Project();
         $project2->setId('second');

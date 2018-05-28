@@ -38,7 +38,7 @@ class SwaggerDumpCommand extends Command
     {
         parent::__construct();
         $this->dumpService = $dumpService;
-        $this->client      = $client;
+        $this->client = $client;
     }
 
     protected function configure()
@@ -51,7 +51,7 @@ class SwaggerDumpCommand extends Command
         $json = $this->dumpService->getSwaggerDoc();
 
         $r = $this->client->request('POST', 'http://localhost:80/api/projects/'.self::PROJECT_ID.'/documentations', [
-            'body' => $json
+            'body' => $json,
         ]);
 
         $output->write('<info>'.$r->getStatusCode().'</info>');

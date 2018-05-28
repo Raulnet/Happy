@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: raulnet
  * Date: 25/05/18
- * Time: 22:31
+ * Time: 22:31.
  */
 
 namespace Happy\Service;
-
 
 use Doctrine\ORM\EntityManagerInterface;
 use Happy\Entity\Documentation;
@@ -17,9 +16,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Class DocumentationService
- *
- * @package Happy\Service
+ * Class DocumentationService.
  */
 class DocumentationService extends AbstractService
 {
@@ -44,19 +41,18 @@ class DocumentationService extends AbstractService
     {
         $data = json_decode($docSwagger, true);
         $version = $data['info']['version'];
-        if(empty($version)) {
+        if (empty($version)) {
             throw new HttpException(JsonResponse::HTTP_CONFLICT, 'http.exception.format.documentation.wrong');
         }
-        $version.='.'.time();
+        $version .= '.'.time();
         $lastDocumentation = $this->manager->getRepository(Documentation::class)
                                            ->findOneBy(['project' => $project], ['dateCreation' => 'DESC']);
-        if(empty($lastDocumentation)) {
+        if (empty($lastDocumentation)) {
             $this->createDocumentation($project, $docSwagger, $version);
-
         } else {
             $documentationPath = $lastDocumentation->getPath();
             $docStream = file_get_contents($documentationPath);
-            if($docStream !== $docSwagger) {
+            if ($docStream !== $docSwagger) {
                 $this->createDocumentation($project, $docSwagger, $version);
             }
         }
@@ -67,7 +63,8 @@ class DocumentationService extends AbstractService
      * @param string  $swaggerDoc
      * @param string  $version
      */
-    private function createDocumentation(Project $project, string $swaggerDoc, string $version): void {
+    private function createDocumentation(Project $project, string $swaggerDoc, string $version): void
+    {
         $uuid = Uuid::uuid4();
         $fileName = '/tmp/'.$uuid->toString().'.json';
         $this->putFile($fileName, $swaggerDoc);
@@ -99,6 +96,4 @@ class DocumentationService extends AbstractService
         $this->manager->persist($documentation);
         $this->manager->flush();
     }
-
-
 }

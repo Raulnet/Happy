@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 abstract class AbstractApiController extends AbstractController
 {
-    /** @var \JMS\Serializer\Serializer  */
+    /** @var \JMS\Serializer\Serializer */
     private $serializer;
     /** @var NormalizerService */
     protected $normalizer;
@@ -43,8 +43,7 @@ abstract class AbstractApiController extends AbstractController
      */
     public function apiJsonResponse($content, int $code = JsonResponse::HTTP_OK): JsonResponse
     {
-
-        $content =  $this->serializer->serialize($content, SerializerService::SERIALIZE_FORMAT_JSON);
+        $content = $this->serializer->serialize($content, SerializerService::SERIALIZE_FORMAT_JSON);
 
         $response = new JsonResponse();
         $response->setStatusCode($code);
