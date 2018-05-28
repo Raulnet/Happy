@@ -140,12 +140,16 @@ class UserControllerTest extends AbstractTestCase
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path, [], [], [], json_encode($project));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-
+        // TEST Reponse 200 Ok added
         $path = $this->router->generate('_happy_user_add_project', ['userId' => $this->uuid, 'projectId' => $this->uuid]);
         $this->client->request('PATCH', $path, [], [], []);
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->client->request('PUT', $path, [], [], []);
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        // TEST Reponse 404 not found
+        $path = $this->router->generate('_happy_user_add_project', ['userId' => 'wrong id', 'projectId' => $this->uuid]);
+        $this->client->request('PATCH', $path, [], [], []);
+        $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
     }
 
     public function testRemoveProject()
@@ -161,11 +165,11 @@ class UserControllerTest extends AbstractTestCase
         $path = $this->router->generate('_happy_post_project');
         $this->client->request('POST', $path, [], [], [], json_encode($project));
         $this->assertEquals(JsonResponse::HTTP_CREATED, $this->client->getResponse()->getStatusCode());
-
+        // TEST Reponse 200 Ok removed
         $path = $this->router->generate('_happy_user_remove_project', ['userId' => $this->uuid, 'projectId' => $this->uuid]);
         $this->client->request('DELETE', $path, [], [], []);
         $this->assertEquals(JsonResponse::HTTP_OK, $this->client->getResponse()->getStatusCode());
-
+        // TEST Reponse 404 not found
         $path = $this->router->generate('_happy_user_remove_project', ['userId' => 'WRONG_ID', 'projectId' => $this->uuid]);
         $this->client->request('DELETE', $path, [], [], []);
         $this->assertEquals(JsonResponse::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());

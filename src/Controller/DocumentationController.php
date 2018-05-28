@@ -10,12 +10,15 @@ namespace Happy\Controller;
 
 use Happy\Entity\Documentation;
 use Happy\Entity\Project;
+use Happy\Service\DocumentationService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
+use Happy\Service\NormalizerService;
+use Happy\Service\SerializerService;
 
 /**
  * Class DocumentationController.
@@ -24,6 +27,27 @@ use Swagger\Annotations as SWG;
  */
 class DocumentationController extends AbstractApiController
 {
+    /**
+     * @var DocumentationService
+     */
+    private $documentationService;
+
+    /**
+     * DocumentationController constructor.
+     *
+     * @param SerializerService    $serializerService
+     * @param NormalizerService    $normalizerService
+     * @param DocumentationService $documentationService
+     */
+    public function __construct(
+        SerializerService $serializerService,
+        NormalizerService $normalizerService,
+        DocumentationService $documentationService
+    ) {
+        parent::__construct($serializerService, $normalizerService);
+        $this->documentationService = $documentationService;
+    }
+
     /**
      * @param Project $project
      *
@@ -44,8 +68,7 @@ class DocumentationController extends AbstractApiController
      */
     public function getDocumentations(Project $project)
     {
-        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);
-
+        $documentations = $this->getDoctrine()->getRepository(Documentation::class)->findBy(['project' => $project]);;
         return $this->apiJsonResponse($documentations, JsonResponse::HTTP_OK);
     }
 
@@ -79,8 +102,8 @@ class DocumentationController extends AbstractApiController
     }
 
     /**
-     * @param Project       $project
-     * @param Documentation $documentation
+     * @param Request $request
+     * @param Project $project
      *
      * @Route("/projects/{id}/documentations",
      *     name="_happy_post_documentation",
@@ -90,7 +113,6 @@ class DocumentationController extends AbstractApiController
      *          }
      *     )
      * )
-     * @ParamConverter("documentation", converter="body.converter", class="Happy\Entity\Documentation")
      * @SWG\Response(
      *     response=201,
      *     description="create documentation by method Post"
@@ -99,12 +121,9 @@ class DocumentationController extends AbstractApiController
      *
      * @return JsonResponse
      */
-    public function postDocumentation(Project $project, Documentation $documentation)
+    public function postDocumentation(Request $request, Project $project)
     {
-        $documentation->setProject($project);
-        $manager = $this->getDoctrine()->getManager();
-        $manager->persist($documentation);
-        $manager->flush();
+        $this->documentationService->pushDocumentationRaw($project, $request->getContent());
 
         return $this->apiJsonResponse(null, JsonResponse::HTTP_CREATED);
     }

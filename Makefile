@@ -33,7 +33,7 @@ phpunit:
 
 phpunit-coverage:
 	docker-compose -f docker-compose.yml run --rm api ./bin/console cache:clear --no-warmup --env=test
-	docker-compose -f docker-compose.yml run --rm api ./vendor/bin/simple-phpunit --coverage-html ./var/phpunit-coverage
+	docker-compose -f docker-compose.yml run --rm api ./vendor/bin/simple-phpunit --coverage-html ./build/html
 
 rebuild:
 	docker-compose down

@@ -23,6 +23,24 @@ use Swagger\Annotations as SWG;
 class ProjectController extends AbstractApiController
 {
     /**
+     * @Route("/projects",
+     *     name="_happy_get_projects",
+     *     methods={"GET"}
+     *     )
+     * @SWG\Response(
+     *     response=200,
+     *     description="Return all projects"
+     * )
+     * @SWG\Tag(name="project")
+     *
+     * @return JsonResponse
+     */
+    public function getProjects(): JsonResponse
+    {
+        $projects = $this->getDoctrine()->getRepository(Project::class)->findAll();
+        return $this->apiJsonResponse($projects, JsonResponse::HTTP_OK);
+    }
+    /**
      * @param Project $project
      * @Route("/projects/{id}",
      *     name="_happy_get_project",

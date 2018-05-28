@@ -16,6 +16,7 @@ use JMS\Serializer\Serializer;
  */
 class SerializerService extends AbstractService
 {
+    const SERIALIZE_FORMAT_JSON = 'json';
     /**
      * @var Serializer
      */
